@@ -151,6 +151,7 @@
     <ClCompile Include="Contents\Creature\Creature.cpp" />
     <ClCompile Include="Contents\Creature\Knight.cpp" />
     <ClCompile Include="Contents\Creature\HobGoblin.cpp" />
+    <ClCompile Include="Contents\Creature\Mage.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Contents\Creature\Monster.cpp" />
     <ClCompile Include="pch.cpp">
@@ -172,6 +173,7 @@
     <ClInclude Include="Contents\Creature\Monster.h" />
     <ClInclude Include="Contents\Creature\Knight.h" />
     <ClInclude Include="Contents\Creature\HobGoblin.h" />
+    <ClInclude Include="Contents\Creature\Mage.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Contents\Creature\Player.h" />
     <ClInclude Include="Contents\World\World.h" />

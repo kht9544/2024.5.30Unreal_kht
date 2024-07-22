@@ -1,4 +1,4 @@
-#include "pch.h"	
+ #include "pch.h"	
 #include "World.h"
 
 World::World()
@@ -7,13 +7,13 @@ World::World()
 {
 	Input();
 
-	_monsters.reserve(10);
+	/*_monsters.reserve(10);
 
 	for (int i = 0; i < 10; i++)
 	{
 		Monster* monster = new Monster("Goblin", 50, 10);
 		_monsters.push_back(monster);
-	}
+	}*/
 
 	Creature* player = new Knight("Player", 500, 50);
 	players.push_back(player);
@@ -21,19 +21,19 @@ World::World()
 	players.push_back(player1);
 	Creature* player2 = new Knight("Player2", 500, 80);
 	players.push_back(player2);
-	Creature* player3 = new Knight("Player3", 500, 70);
+	Creature* player3 = new Archer("Player3", 500, 70);
 	players.push_back(player3);
-	Creature* player4 = new Knight("Player4", 500, 40);
+	Creature* player4 = new Archer("Player4", 500, 40);
 	players.push_back(player4);
-	Creature* player5 = new Knight("Player5", 500, 30);
+	Creature* player5 = new Archer("Player5", 500, 30);
 	players.push_back(player5);
-	Creature* player6 = new Knight("Player6", 500, 10);
+	Creature* player6 = new Archer("Player6", 500, 10);
 	players.push_back(player6);
-	Creature* player7 = new Knight("Player7", 500, 80);
+	Creature* player7 = new Mage("Player7", 500, 80,30);
 	players.push_back(player7);
-	Creature* player8 = new Knight("Player8", 500, 150);
+	Creature* player8 = new Mage("Player8", 500, 150,30);
 	players.push_back(player8);
-	Creature* player9 = new Knight("Player9", 500, 30);
+	Creature* player9 = new Mage("Player9", 500, 30,30);
 	players.push_back(player9);
 
 
@@ -156,12 +156,13 @@ void World::SelectPlayer(int num, string name, Creature** creature)
 
 void World::Input()
 {
+	/*
 	int playerNum = 0;
 	int cumNum = 0;
 	string name;
 	cumNum = rand() % 2 + 1; // 1 ~ 2
 
-	/*SelectPlayer(cumNum, "computer", &_computer);
+	SelectPlayer(cumNum, "computer", &_computer);
 	cout << "이름을 입력해주세요" << endl;
 	cin >> name;
 	cout << "1~2까지의 클래스를 입력해주세요." << endl;
@@ -244,10 +245,5 @@ void World::Battle3()
 
 		}
 	}
-
-
-
-
-
 }
 

@@ -13,7 +13,7 @@ public:
 
 	virtual void TakeDamage(int amount, Creature* attacker = nullptr);
 
-	bool IsDead();
+	bool IsDead() { return _curHp < 0; }
 	string GetName() { return _name; }
 	bool isActive = false;
 

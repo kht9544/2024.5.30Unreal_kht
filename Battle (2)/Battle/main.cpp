@@ -28,6 +28,54 @@
 
 int main()
 {
+    /*
+    World* world = new World();
+
+    bool complete = false;
+    while (!complete)
+    {
+        
+        int GameMode;
+        cout << "GameMode ¼±ÅÃ:" << '\n';
+        cin >> GameMode;
+
+        switch (GameMode)
+        {
+        case 1:
+        {
+            while (true)
+            {
+                world->Battle1();
+
+                if (world->End())
+                {
+                    if (world->Playerwin)
+                    {
+                        complete = true;
+                    }
+                    break;
+                }
+            }
+        }
+        break;
+
+
+        case 2:
+        {
+            while (true)
+            {
+                world->Battle2();
+
+                if (world->GoblinClear())
+                {
+                    cout << "Goblin Clear" << '\n';
+                    break;
+                }
+            }
+        }
+        break;
+        }
+    }*/
 	srand(time(nullptr));
 
 	World* world = new World();

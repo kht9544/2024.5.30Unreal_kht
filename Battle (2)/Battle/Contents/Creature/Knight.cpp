@@ -17,7 +17,6 @@ void Knight::Attack(Creature* other)
 
 	if (ratio < 0.5f)
 	{
-		// 현재 체력이 50프로 미만
 		other->TakeDamage(_atk * 2, this);
 	}
 	else

@@ -53,13 +53,3 @@ void Creature::TakeDamage(int amount, Creature* attacker)
 	PrintInfo();
 }
 
-bool Creature::IsDead()
-{
-	if (_curHp <= 0)
-	{
-		isActive = false;
-		return true;
-	}
-
-	return false;
-}

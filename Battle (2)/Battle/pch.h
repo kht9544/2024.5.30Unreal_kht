@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <vector>
-#include<algorithm>
+#include <algorithm>
 
 using namespace std;
 
@@ -22,5 +22,6 @@ using namespace std;
 
 #include "Contents/Creature/Knight.h"
 #include "Contents/Creature/Archer.h"
+#include "Contents/Creature/Mage.h"
 
 #include "Contents/World/World.h"

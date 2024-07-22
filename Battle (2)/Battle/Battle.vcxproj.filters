@@ -38,6 +38,9 @@
     <ClCompile Include="Contents\Creature\HobGoblin.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Contents\Creature\Mage.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Contents\Creature\Creature.h">
@@ -52,5 +55,6 @@
     <ClInclude Include="Contents\Creature\Archer.h" />
     <ClInclude Include="Contents\World\World.h" />
     <ClInclude Include="Contents\Creature\HobGoblin.h" />
+    <ClInclude Include="Contents\Creature\Mage.h" />
   </ItemGroup>
 </Project>
