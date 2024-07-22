@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "UE_kht",
+			"Path": "..\\Source\\UE_kht.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "UE_khtEditor",
+			"Path": "..\\Source\\UE_khtEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}
