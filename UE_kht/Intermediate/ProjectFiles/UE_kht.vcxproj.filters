@@ -36,6 +36,18 @@
     <ClInclude Include="..\..\Source\UE_kht\MyActor.h">
       <Filter>Source\UE_kht</Filter>
     </ClInclude>
+    <ClCompile Include="..\..\Source\UE_kht\MyGameModeBase.cpp">
+      <Filter>Source\UE_kht</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\UE_kht\MyGameModeBase.h">
+      <Filter>Source\UE_kht</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\UE_kht\MyPawn.cpp">
+      <Filter>Source\UE_kht</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\UE_kht\MyPawn.h">
+      <Filter>Source\UE_kht</Filter>
+    </ClInclude>
     <None Include="..\..\Source\UE_kht\UE_kht.Build.cs">
       <Filter>Source\UE_kht</Filter>
     </None>

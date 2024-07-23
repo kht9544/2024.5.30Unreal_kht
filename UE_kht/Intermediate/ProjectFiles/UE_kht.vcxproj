@@ -261,6 +261,14 @@
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <ClInclude Include="..\..\Source\UE_kht\MyActor.h"/>
+    <ClCompile Include="..\..\Source\UE_kht\MyGameModeBase.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\UE_kht\MyGameModeBase.h"/>
+    <ClCompile Include="..\..\Source\UE_kht\MyPawn.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\UE_kht\MyPawn.h"/>
     <None Include="..\..\Source\UE_kht\UE_kht.Build.cs"/>
     <ClCompile Include="..\..\Source\UE_kht\UE_kht.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
