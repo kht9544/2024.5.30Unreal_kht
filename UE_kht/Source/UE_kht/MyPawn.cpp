@@ -101,5 +101,4 @@ void AMyPawn::RightLeft(float value)
 		AddMovementInput(rightleft, value);
 	}
 }
-
-
+ 
