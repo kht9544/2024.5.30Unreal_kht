@@ -5,11 +5,13 @@
 	"Description": "",
 	"Modules": [
 		{
-			"Name": "UE_kht",
+			"Name": "UE_Hanil",
 			"Type": "Runtime",
 			"LoadingPhase": "Default",
 			"AdditionalDependencies": [
-				"Engine"
+				"Engine",
+				"UMG",
+				"AIModule"
 			]
 		}
 	],
