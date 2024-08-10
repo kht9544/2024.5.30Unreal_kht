@@ -1,0 +1,104 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "SimpleShooter (Debug)",
+			"request": "launch",
+			"preLaunchTask": "SimpleShooter Mac Debug Build",
+			"program": "/Users/kim/Documents/Unreal Projects/SimpleShooter/Binaries/Mac/UE4-Mac-Debug.app/Contents/MacOS/UE4-Mac-Debug",
+			"args": [
+			],
+			"cwd": "/Users/Shared/Epic Games/UE_4.27",
+			"type": "lldb"
+		},
+		{
+			"name": "SimpleShooter (DebugGame)",
+			"request": "launch",
+			"preLaunchTask": "SimpleShooter Mac DebugGame Build",
+			"program": "/Users/kim/Documents/Unreal Projects/SimpleShooter/Binaries/Mac/UE4-Mac-DebugGame.app/Contents/MacOS/UE4-Mac-DebugGame",
+			"args": [
+			],
+			"cwd": "/Users/Shared/Epic Games/UE_4.27",
+			"type": "lldb"
+		},
+		{
+			"name": "SimpleShooter (Development)",
+			"request": "launch",
+			"preLaunchTask": "SimpleShooter Mac Development Build",
+			"program": "/Users/kim/Documents/Unreal Projects/SimpleShooter/Binaries/Mac/UE4.app/Contents/MacOS/UE4",
+			"args": [
+			],
+			"cwd": "/Users/Shared/Epic Games/UE_4.27",
+			"type": "lldb"
+		},
+		{
+			"name": "SimpleShooter (Shipping)",
+			"request": "launch",
+			"preLaunchTask": "SimpleShooter Mac Shipping Build",
+			"program": "/Users/kim/Documents/Unreal Projects/SimpleShooter/Binaries/Mac/UE4-Mac-Shipping.app/Contents/MacOS/UE4-Mac-Shipping",
+			"args": [
+			],
+			"cwd": "/Users/Shared/Epic Games/UE_4.27",
+			"type": "lldb"
+		},
+		{
+			"name": "SimpleShooter (Test)",
+			"request": "launch",
+			"preLaunchTask": "SimpleShooter Mac Test Build",
+			"program": "/Users/kim/Documents/Unreal Projects/SimpleShooter/Binaries/Mac/UE4-Mac-Test.app/Contents/MacOS/UE4-Mac-Test",
+			"args": [
+			],
+			"cwd": "/Users/Shared/Epic Games/UE_4.27",
+			"type": "lldb"
+		},
+		{
+			"name": "SimpleShooterEditor (Debug)",
+			"request": "launch",
+			"preLaunchTask": "SimpleShooterEditor Mac Debug Build",
+			"program": "/Users/Shared/Epic Games/UE_4.27/Engine/Binaries/Mac/UE4Editor-Mac-Debug.app/Contents/MacOS/UE4Editor-Mac-Debug",
+			"args": [
+				"/Users/kim/Documents/Unreal Projects/SimpleShooter/SimpleShooter.uproject"
+			],
+			"cwd": "/Users/Shared/Epic Games/UE_4.27",
+			"type": "lldb"
+		},
+		{
+			"name": "SimpleShooterEditor (DebugGame)",
+			"request": "launch",
+			"preLaunchTask": "SimpleShooterEditor Mac DebugGame Build",
+			"program": "/Users/Shared/Epic Games/UE_4.27/Engine/Binaries/Mac/UE4Editor-Mac-DebugGame.app/Contents/MacOS/UE4Editor-Mac-DebugGame",
+			"args": [
+				"/Users/kim/Documents/Unreal Projects/SimpleShooter/SimpleShooter.uproject"
+			],
+			"cwd": "/Users/Shared/Epic Games/UE_4.27",
+			"type": "lldb"
+		},
+		{
+			"name": "SimpleShooterEditor (Development)",
+			"request": "launch",
+			"preLaunchTask": "SimpleShooterEditor Mac Development Build",
+			"program": "/Users/Shared/Epic Games/UE_4.27/Engine/Binaries/Mac/UE4Editor.app/Contents/MacOS/UE4Editor",
+			"args": [
+				"/Users/kim/Documents/Unreal Projects/SimpleShooter/SimpleShooter.uproject"
+			],
+			"cwd": "/Users/Shared/Epic Games/UE_4.27",
+			"type": "lldb"
+		},
+		{
+			"name": "Generate Project Files",
+			"type": "mono",
+			"request": "launch",
+			"program": "/Users/Shared/Epic Games/UE_4.27/Engine/Binaries/DotNET/UnrealBuildTool.exe",
+			"console": "internalConsole",
+			"args": [
+				"-projectfiles",
+				"-vscode",
+				"-project=/Users/kim/Documents/Unreal Projects/SimpleShooter/SimpleShooter.uproject",
+				"-game",
+				"-engine"
+			],
+			"internalConsoleOptions": "openOnSessionStart",
+			"cwd": "/Users/Shared/Epic Games/UE_4.27"
+		}
+	]
+}
