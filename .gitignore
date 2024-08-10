@@ -311,3 +311,7 @@ Plugins/**/Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
+ArenaBattle/Content/Primitive_Characters_Pack/Textures/Primitive_05/T_Primitive_05_Ao.uasset
+ArenaBattle/Content/Primitive_Characters_Pack/Textures/Primitive_05/T_Primitive_05_Normals.uasset
+ArenaBattle/Content/Primitive_Characters_Pack/Textures/Primitive_03/Character/T_Primitive_03_Normals.uasset
+ArenaBattle/Content/Primitive_Characters_Pack/Textures/Primitive_04/Character/T_Primitive_04_Normals.uasset
