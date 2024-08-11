@@ -17,7 +17,7 @@ AMyUIManager::AMyUIManager()
 	if (invenClass.Succeeded())
 	{
 		auto temp = invenClass.Class;
-		//_invenWidget = CreateWidget<UMyInventoryUI>(GetWorld(), invenClass.Class);
+		_invenWidget = CreateWidget<UMyInventoryUI>(GetWorld(), invenClass.Class);
 	}
 }
 
@@ -25,6 +25,12 @@ AMyUIManager::AMyUIManager()
 void AMyUIManager::BeginPlay()
 {
 	Super::BeginPlay();
+
+	if(_invenWidget)
+	{
+		_invenWidget->SetVisibility(ESlateVisibility::Hidden);
+		_invenWidget->AddToViewport();
+	}
 
 }
 

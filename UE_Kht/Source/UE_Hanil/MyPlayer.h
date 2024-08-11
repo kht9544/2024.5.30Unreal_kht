@@ -27,6 +27,8 @@ private:
 	void Look(const FInputActionValue& value);
 	void JumpA(const FInputActionValue& value);
 	void AttackA(const FInputActionValue& value);
+	void OpenInven(const FInputActionValue& value);
+
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
@@ -43,6 +45,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* _itemDropAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* _openInvenAction;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Input, meta = (AllowPrivateAccess = "true"))
 	class USpringArmComponent* _springArm;

@@ -7,6 +7,7 @@
 #include "MyInvenComponent.generated.h"
 
 class AMyItem;
+class UMyInventoryUI;
 
 DECLARE_MULTICAST_DELEGATE_TwoParams(ItemAdded, int itemId, int itemIndex)
 
@@ -27,6 +28,8 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+	void OpenInven();
+
 	void AddItem(AMyItem* item);
 	UFUNCTION()
 	void DropItem();
@@ -36,4 +39,7 @@ public:
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Items, meta = (AllowPrivateAccess = "true"))
 	TArray<class AMyItem*> _items;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Inven, meta = (AllowPrivateAccess = "true"))
+	UMyInventoryUI* _inven;
 };

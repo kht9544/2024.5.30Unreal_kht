@@ -5,7 +5,7 @@
 	"TargetType": "Editor",
 	"IsTestTarget": false,
 	"Architecture": "x64",
-	"Project": "../../UE_Hanil.uproject",
+	"Project": "../../UE_Kht.uproject",
 	"Launch": "$(EngineDir)/Binaries/Mac/UnrealEditor.app/Contents/MacOS/UnrealEditor",
 	"LaunchCmd": "$(EngineDir)/Binaries/Mac/UnrealEditor-Cmd",
 	"Version": 
@@ -22560,7 +22560,7 @@
 			"Type": "UFS"
 		},
 		{
-			"Path": "$(ProjectDir)/UE_Hanil.uproject",
+			"Path": "$(ProjectDir)/UE_Kht.uproject",
 			"Type": "UFS"
 		}
 	],

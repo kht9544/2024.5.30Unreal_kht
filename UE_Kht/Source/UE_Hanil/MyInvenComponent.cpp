@@ -2,7 +2,7 @@
 
 
 #include "MyInvenComponent.h"
-
+#include "MyInventoryUI.h"
 #include "MyItem.h"
 
 // Sets default values for this component's properties
@@ -34,11 +34,22 @@ void UMyInvenComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	// ...
 }
 
+
+void UMyInvenComponent::OpenInven()
+{
+
+	
+}
+
+
 void UMyInvenComponent::AddItem(AMyItem* item)
 {
 	_items.Add(item);
 	_itemAddedEvent.Broadcast(item->_itemId, _items.Num() - 1);
 }
+
+
+
 
 void UMyInvenComponent::DropItem()
 {

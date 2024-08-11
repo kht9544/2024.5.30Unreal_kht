@@ -65,6 +65,9 @@ void AMyPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 		// ItemDrop
 		EnhancedInputComponent->BindAction(_itemDropAction, ETriggerEvent::Started, this, &AMyPlayer::DropItemFromCharacter);
+	
+		EnhancedInputComponent->BindAction(_openInvenAction, ETriggerEvent::Started, this, &AMyPlayer::OpenInven);
+
 	}
 }
 
@@ -89,6 +92,9 @@ void AMyPlayer::Look(const FInputActionValue& value)
 	if (Controller != nullptr)
 	{
 		AddControllerYawInput(LookAxisVector.X);
+		 FRotator NewRotation = _springArm->GetRelativeRotation();
+        NewRotation.Pitch = FMath::Clamp(NewRotation.Pitch + LookAxisVector.Y, -80.0f, 80.0f);  // 피치 범위를 -80도에서 80도로 제한
+        _springArm->SetRelativeRotation(NewRotation);
 	}
 }
 
@@ -115,5 +121,15 @@ void AMyPlayer::AttackA(const FInputActionValue& value)
 		_curAttackIndex++;
 
 		_animInstance->JumpToSection(_curAttackIndex);
+	}
+}
+
+void AMyPlayer::OpenInven(const FInputActionValue& value)
+{
+	bool isPressed = value.Get<bool>();
+
+	if (isPressed)
+	{
+		
 	}
 }
