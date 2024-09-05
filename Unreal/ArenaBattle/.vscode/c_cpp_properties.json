@@ -1,0 +1,27 @@
+{
+    "configurations": [
+        {
+            "name": "ArenaBattleEditor Editor Mac Development (ArenaBattle)",
+            "intelliSenseMode": "clang-x64",
+            "macFrameworkPath": [
+                "/System/Library/Frameworks",
+                "/Library/Frameworks"
+            ],
+            "compileCommands": "/Users/kim/Documents/Unreal Projects/ArenaBattle/.vscode/compileCommands_ArenaBattle.json",
+            "cStandard": "c17",
+            "cppStandard": "c++17"
+        },
+        {
+            "name": "Mac",
+            "intelliSenseMode": "clang-x64",
+            "macFrameworkPath": [
+                "/System/Library/Frameworks",
+                "/Library/Frameworks"
+            ],
+            "compileCommands": "/Users/kim/Documents/Unreal Projects/ArenaBattle/.vscode/compileCommands_Default.json",
+            "cStandard": "c17",
+            "cppStandard": "c++17"
+        }
+    ],
+    "version": 4
+}

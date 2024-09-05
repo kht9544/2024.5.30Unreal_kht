@@ -1,0 +1,37 @@
+[
+	{
+		"file": "/Users/kim/Documents/Unreal Projects/ArenaBattle/Source/ArenaBattle/ArenaBattle.Build.cs",
+		"command": "/Users/kim/Downloads/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ @\"/Users/kim/Documents/Unreal Projects/ArenaBattle/.vscode/compileCommands_Default/ArenaBattle.191.rsp\"",
+		"directory": "/Users/Shared/Epic Games/UE_4.27/Engine/Source"
+	},
+	{
+		"file": "/Users/kim/Documents/Unreal Projects/ArenaBattle/Source/ArenaBattle/ArenaBattle.cpp",
+		"command": "/Users/kim/Downloads/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ @\"/Users/kim/Documents/Unreal Projects/ArenaBattle/.vscode/compileCommands_Default/ArenaBattle.191.rsp\"",
+		"directory": "/Users/Shared/Epic Games/UE_4.27/Engine/Source"
+	},
+	{
+		"file": "/Users/kim/Documents/Unreal Projects/ArenaBattle/Source/ArenaBattle/ArenaBattle.h",
+		"command": "/Users/kim/Downloads/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ @\"/Users/kim/Documents/Unreal Projects/ArenaBattle/.vscode/compileCommands_Default/ArenaBattle.191.rsp\"",
+		"directory": "/Users/Shared/Epic Games/UE_4.27/Engine/Source"
+	},
+	{
+		"file": "/Users/kim/Documents/Unreal Projects/ArenaBattle/Source/ArenaBattle/ArenaBattleCharacter.cpp",
+		"command": "/Users/kim/Downloads/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ @\"/Users/kim/Documents/Unreal Projects/ArenaBattle/.vscode/compileCommands_Default/ArenaBattle.191.rsp\"",
+		"directory": "/Users/Shared/Epic Games/UE_4.27/Engine/Source"
+	},
+	{
+		"file": "/Users/kim/Documents/Unreal Projects/ArenaBattle/Source/ArenaBattle/ArenaBattleCharacter.h",
+		"command": "/Users/kim/Downloads/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ @\"/Users/kim/Documents/Unreal Projects/ArenaBattle/.vscode/compileCommands_Default/ArenaBattle.191.rsp\"",
+		"directory": "/Users/Shared/Epic Games/UE_4.27/Engine/Source"
+	},
+	{
+		"file": "/Users/kim/Documents/Unreal Projects/ArenaBattle/Source/ArenaBattle/ArenaBattleGameMode.cpp",
+		"command": "/Users/kim/Downloads/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ @\"/Users/kim/Documents/Unreal Projects/ArenaBattle/.vscode/compileCommands_Default/ArenaBattle.191.rsp\"",
+		"directory": "/Users/Shared/Epic Games/UE_4.27/Engine/Source"
+	},
+	{
+		"file": "/Users/kim/Documents/Unreal Projects/ArenaBattle/Source/ArenaBattle/ArenaBattleGameMode.h",
+		"command": "/Users/kim/Downloads/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ @\"/Users/kim/Documents/Unreal Projects/ArenaBattle/.vscode/compileCommands_Default/ArenaBattle.191.rsp\"",
+		"directory": "/Users/Shared/Epic Games/UE_4.27/Engine/Source"
+	}
+]

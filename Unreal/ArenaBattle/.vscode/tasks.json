@@ -1,0 +1,720 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "ArenaBattle Mac Debug Build",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattle",
+				"Mac",
+				"Debug",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		},
+		{
+			"label": "ArenaBattle Mac Debug Rebuild",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattle",
+				"Mac",
+				"Debug",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"ArenaBattle Mac Debug Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		},
+		{
+			"label": "ArenaBattle Mac Debug Clean",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattle",
+				"Mac",
+				"Debug",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex",
+				"-clean"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		},
+		{
+			"label": "ArenaBattle Mac DebugGame Build",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattle",
+				"Mac",
+				"DebugGame",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		},
+		{
+			"label": "ArenaBattle Mac DebugGame Rebuild",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattle",
+				"Mac",
+				"DebugGame",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"ArenaBattle Mac DebugGame Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		},
+		{
+			"label": "ArenaBattle Mac DebugGame Clean",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattle",
+				"Mac",
+				"DebugGame",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex",
+				"-clean"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		},
+		{
+			"label": "ArenaBattle Mac Development Build",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattle",
+				"Mac",
+				"Development",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		},
+		{
+			"label": "ArenaBattle Mac Development Rebuild",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattle",
+				"Mac",
+				"Development",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"ArenaBattle Mac Development Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		},
+		{
+			"label": "ArenaBattle Mac Development Clean",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattle",
+				"Mac",
+				"Development",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex",
+				"-clean"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		},
+		{
+			"label": "ArenaBattle Mac Shipping Build",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattle",
+				"Mac",
+				"Shipping",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		},
+		{
+			"label": "ArenaBattle Mac Shipping Rebuild",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattle",
+				"Mac",
+				"Shipping",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"ArenaBattle Mac Shipping Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		},
+		{
+			"label": "ArenaBattle Mac Shipping Clean",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattle",
+				"Mac",
+				"Shipping",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex",
+				"-clean"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		},
+		{
+			"label": "ArenaBattle Mac Test Build",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattle",
+				"Mac",
+				"Test",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		},
+		{
+			"label": "ArenaBattle Mac Test Rebuild",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattle",
+				"Mac",
+				"Test",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"ArenaBattle Mac Test Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		},
+		{
+			"label": "ArenaBattle Mac Test Clean",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattle",
+				"Mac",
+				"Test",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex",
+				"-clean"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		},
+		{
+			"label": "ArenaBattle IOS Debug Build",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattle",
+				"IOS",
+				"Debug",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		},
+		{
+			"label": "ArenaBattle IOS Debug Rebuild",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattle",
+				"IOS",
+				"Debug",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"ArenaBattle IOS Debug Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		},
+		{
+			"label": "ArenaBattle IOS Debug Clean",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattle",
+				"IOS",
+				"Debug",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex",
+				"-clean"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		},
+		{
+			"label": "ArenaBattle IOS DebugGame Build",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattle",
+				"IOS",
+				"DebugGame",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		},
+		{
+			"label": "ArenaBattle IOS DebugGame Rebuild",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattle",
+				"IOS",
+				"DebugGame",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"ArenaBattle IOS DebugGame Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		},
+		{
+			"label": "ArenaBattle IOS DebugGame Clean",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattle",
+				"IOS",
+				"DebugGame",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex",
+				"-clean"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		},
+		{
+			"label": "ArenaBattle IOS Development Build",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattle",
+				"IOS",
+				"Development",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		},
+		{
+			"label": "ArenaBattle IOS Development Rebuild",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattle",
+				"IOS",
+				"Development",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"ArenaBattle IOS Development Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		},
+		{
+			"label": "ArenaBattle IOS Development Clean",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattle",
+				"IOS",
+				"Development",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex",
+				"-clean"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		},
+		{
+			"label": "ArenaBattle IOS Shipping Build",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattle",
+				"IOS",
+				"Shipping",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		},
+		{
+			"label": "ArenaBattle IOS Shipping Rebuild",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattle",
+				"IOS",
+				"Shipping",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"ArenaBattle IOS Shipping Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		},
+		{
+			"label": "ArenaBattle IOS Shipping Clean",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattle",
+				"IOS",
+				"Shipping",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex",
+				"-clean"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		},
+		{
+			"label": "ArenaBattle IOS Test Build",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattle",
+				"IOS",
+				"Test",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		},
+		{
+			"label": "ArenaBattle IOS Test Rebuild",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattle",
+				"IOS",
+				"Test",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"ArenaBattle IOS Test Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		},
+		{
+			"label": "ArenaBattle IOS Test Clean",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattle",
+				"IOS",
+				"Test",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex",
+				"-clean"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		},
+		{
+			"label": "ArenaBattleEditor Mac Debug Build",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattleEditor",
+				"Mac",
+				"Debug",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		},
+		{
+			"label": "ArenaBattleEditor Mac Debug Rebuild",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattleEditor",
+				"Mac",
+				"Debug",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"ArenaBattleEditor Mac Debug Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		},
+		{
+			"label": "ArenaBattleEditor Mac Debug Clean",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattleEditor",
+				"Mac",
+				"Debug",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex",
+				"-clean"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		},
+		{
+			"label": "ArenaBattleEditor Mac DebugGame Build",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattleEditor",
+				"Mac",
+				"DebugGame",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		},
+		{
+			"label": "ArenaBattleEditor Mac DebugGame Rebuild",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattleEditor",
+				"Mac",
+				"DebugGame",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"ArenaBattleEditor Mac DebugGame Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		},
+		{
+			"label": "ArenaBattleEditor Mac DebugGame Clean",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattleEditor",
+				"Mac",
+				"DebugGame",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex",
+				"-clean"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		},
+		{
+			"label": "ArenaBattleEditor Mac Development Build",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattleEditor",
+				"Mac",
+				"Development",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		},
+		{
+			"label": "ArenaBattleEditor Mac Development Rebuild",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattleEditor",
+				"Mac",
+				"Development",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"ArenaBattleEditor Mac Development Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		},
+		{
+			"label": "ArenaBattleEditor Mac Development Clean",
+			"group": "build",
+			"command": "Engine/Build/BatchFiles/Mac/Build.sh",
+			"args": [
+				"ArenaBattleEditor",
+				"Mac",
+				"Development",
+				"/Users/kim/Documents/Unreal Projects/ArenaBattle/ArenaBattle.uproject",
+				"-waitmutex",
+				"-clean"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "/Users/Shared/Epic Games/UE_4.27"
+			}
+		}
+	]
+}
