@@ -1,0 +1,37 @@
+[
+	{
+		"file": "/Users/kim/Documents/Unreal Projects/SimpleShooter/Source/SimpleShooter/SimpleShooter.Build.cs",
+		"command": "/Users/kim/Downloads/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ @\"/Users/kim/Documents/Unreal Projects/SimpleShooter/.vscode/compileCommands_SimpleShooter/SimpleShooter.191.rsp\"",
+		"directory": "/Users/Shared/Epic Games/UE_4.27/Engine/Source"
+	},
+	{
+		"file": "/Users/kim/Documents/Unreal Projects/SimpleShooter/Source/SimpleShooter/SimpleShooter.cpp",
+		"command": "/Users/kim/Downloads/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ @\"/Users/kim/Documents/Unreal Projects/SimpleShooter/.vscode/compileCommands_SimpleShooter/SimpleShooter.191.rsp\"",
+		"directory": "/Users/Shared/Epic Games/UE_4.27/Engine/Source"
+	},
+	{
+		"file": "/Users/kim/Documents/Unreal Projects/SimpleShooter/Source/SimpleShooter/SimpleShooter.h",
+		"command": "/Users/kim/Downloads/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ @\"/Users/kim/Documents/Unreal Projects/SimpleShooter/.vscode/compileCommands_SimpleShooter/SimpleShooter.191.rsp\"",
+		"directory": "/Users/Shared/Epic Games/UE_4.27/Engine/Source"
+	},
+	{
+		"file": "/Users/kim/Documents/Unreal Projects/SimpleShooter/Source/SimpleShooter/SimpleShooterCharacter.cpp",
+		"command": "/Users/kim/Downloads/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ @\"/Users/kim/Documents/Unreal Projects/SimpleShooter/.vscode/compileCommands_SimpleShooter/SimpleShooter.191.rsp\"",
+		"directory": "/Users/Shared/Epic Games/UE_4.27/Engine/Source"
+	},
+	{
+		"file": "/Users/kim/Documents/Unreal Projects/SimpleShooter/Source/SimpleShooter/SimpleShooterCharacter.h",
+		"command": "/Users/kim/Downloads/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ @\"/Users/kim/Documents/Unreal Projects/SimpleShooter/.vscode/compileCommands_SimpleShooter/SimpleShooter.191.rsp\"",
+		"directory": "/Users/Shared/Epic Games/UE_4.27/Engine/Source"
+	},
+	{
+		"file": "/Users/kim/Documents/Unreal Projects/SimpleShooter/Source/SimpleShooter/SimpleShooterGameMode.cpp",
+		"command": "/Users/kim/Downloads/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ @\"/Users/kim/Documents/Unreal Projects/SimpleShooter/.vscode/compileCommands_SimpleShooter/SimpleShooter.191.rsp\"",
+		"directory": "/Users/Shared/Epic Games/UE_4.27/Engine/Source"
+	},
+	{
+		"file": "/Users/kim/Documents/Unreal Projects/SimpleShooter/Source/SimpleShooter/SimpleShooterGameMode.h",
+		"command": "/Users/kim/Downloads/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ @\"/Users/kim/Documents/Unreal Projects/SimpleShooter/.vscode/compileCommands_SimpleShooter/SimpleShooter.191.rsp\"",
+		"directory": "/Users/Shared/Epic Games/UE_4.27/Engine/Source"
+	}
+]
