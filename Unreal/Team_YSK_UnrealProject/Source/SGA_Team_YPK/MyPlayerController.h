@@ -1,0 +1,31 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+#pragma once
+
+#include "CoreMinimal.h"
+#include "GameFramework/PlayerController.h"
+#include "MyPlayerController.generated.h"
+
+/**
+ * 
+ * 
+ */
+class UInputComponent;
+class UInputAction;
+class UInputMappingContext;
+struct FInputActionValue;
+
+UCLASS()
+class SGA_TEAM_YPK_API AMyPlayerController : public APlayerController
+{
+	GENERATED_BODY()
+	
+public:
+
+protected:
+	
+	UPROPERTY(EditAnyWhere, BlueprintReadOnly, Category = Input)
+	class UInputMappingContext* _inputMappingContext;
+
+	virtual void BeginPlay() override;
+};
