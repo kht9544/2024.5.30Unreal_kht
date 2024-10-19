@@ -8,8 +8,7 @@
 
 using namespace std;
 
-//queue :  줄 세우기(게임에서 큐 돌린다
-// first input first out : FIFO 
+
 template<typename T, typename Container = list<T>>
 class Queue 
 {

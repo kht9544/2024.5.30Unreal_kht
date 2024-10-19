@@ -4,7 +4,6 @@
 PaintScene::PaintScene()
 {
     _rect = make_shared<RectCollider>(Vector2(0.0f,0.0f), Vector2(50.0f,50.0f));
-    // circle
     _circle= make_shared<CircleCollider>(Vector2(50.0f,50.0f), 15);
 }
 
@@ -24,9 +23,7 @@ void PaintScene::Update()
 
 void PaintScene::Render(HDC hdc)
 {
-    // 사각형 그리기
     _rect->Render(hdc);
 
-    // 원 그리기
     _circle->Render(hdc);
 }

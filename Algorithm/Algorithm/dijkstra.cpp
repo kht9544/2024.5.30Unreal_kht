@@ -14,7 +14,7 @@ struct Vertex
 	Vertex(int vertexNum, int g) : vertexNum(vertexNum), g(g) {}
 
 	int vertexNum = 0;
-	int g = 0; // °¡ÁßÄ¡
+	int g = 0;
 
 	bool operator<(const Vertex& other)const
 	{
@@ -92,7 +92,7 @@ void Dijkstra(int start)
 		Vertex hereV = pq.top();
 		pq.pop();
 
-		//Àü¿¡ ¹ß°ßÇÑ°Ô ´õ ÁÁÀº °æ·Î¿´À» ¶§
+		//ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ñ°ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Î¿ï¿½ï¿½ï¿½ ï¿½ï¿½
 		if (best[hereV.vertexNum < hereV.g])
 		{
 			cout << hereV.vertexNum << '\n';
@@ -107,10 +107,7 @@ void Dijkstra(int start)
 
 			if (adjacent[hereV.vertexNum][there]==-1)continue;
 
-			// Áö±Ý ³ªÀÇ À§Ä¡ÀÇ best°ª°ú thereÀÇ±îÁöÀÇ °£¼±ÀÇ ±æÀÌ
 			int newCost = best[hereV.vertexNum] + adjacent[hereV.vertexNum][there];
-
-			//ÀÌÀü¿¡ ¹ß°ßÇÑ °÷ÀÇ best°¡ ´õÀÛ¾ÒÀ¸¸é pq¿¡ »ðÀÔx
 			if (newCost >= best[there])
 				continue;
 
@@ -122,8 +119,8 @@ void Dijkstra(int start)
 	}
 	for (int i = 0; i < adjacent.size(); i++)
 	{
-		cout << i << "ÀÇ ºÎ¸ð:" << parent[i] << '\n';
-		cout << "0ºÎÅÍ" << i << "±îÁöÀÇ ÃÖ¼Ò cost :" << best[i] << '\n';
+		cout <<  parent[i] << '\n';
+		cout  << i << "cost :" << best[i] << '\n';
 	}
 
 }

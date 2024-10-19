@@ -7,8 +7,6 @@
 
 using namespace std;
 
-//stack : 팬케이크
-// FILO : first input last out
 
 template<typename T>
 class Stack

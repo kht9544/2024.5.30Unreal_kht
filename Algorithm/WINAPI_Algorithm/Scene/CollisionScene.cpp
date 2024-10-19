@@ -16,7 +16,6 @@ CollisionScene::~CollisionScene()
 
 void CollisionScene::Update()
 {
-	// _circle2->_center = mousePos;
 	_moveRect->_center = mousePos;
 
 	_circle1->Update();

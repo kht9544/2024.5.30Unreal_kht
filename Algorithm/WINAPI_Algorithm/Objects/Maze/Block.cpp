@@ -10,9 +10,6 @@ Block::Block()
 	_brushes.push_back(CreateSolidBrush(PANTON));
 	_brushes.push_back(CreateSolidBrush(INDIGO));
 
-
-	//_pens[0]  ... GREEN
-	// _pens[1] ... Red
 	_pens.push_back(CreatePen(PS_SOLID, 3, BLUE));
 	_pens.push_back(CreatePen(PS_SOLID, 3, PANTON));
 

@@ -7,12 +7,6 @@
 
 using namespace std;
 
-// 그래프
-// 오일러 (한붓그리기 위해서 그래프라는 자료구조를 만듬) 
-// 
-// 정점(Node,Vertex)과 간선(edge)으로 이뤄진 자료구조
-// 
-// 1.인접리스트
 vector<vector<int>> adjacent_list;
 
 void CreateGraph_Adjacent()
@@ -39,7 +33,6 @@ void CreateGraph_Adjacent()
 	adjacent_list[6].push_back(4);
 }
 
-// 2.인접행렬
 vector<vector<bool>>adjacent_Matrix;
 
 void CreateGraph_AdjacentMatrix()
@@ -90,37 +83,20 @@ int main()
 {
 	CreateGraph_Adjacent();
 	CreateGraph_AdjacentMatrix();
-	//0과2연결?
-	//for (int i = 0; i < adjacent_list[0].size(); i++)
-	//{
-	//	if (adjacent_list[0][i] == 2)
-	//	{
-	//		cout << "0 과 2는 연결" << '\n';
-	//	}
-	//}
 
-	//auto iter =std::find(adjacent_list[0].begin(), adjacent_list[0].end(), 2);
-	//if (iter != adjacent_list[0].end())
-	//{
-	//	cout << "0,2" << '\n';
-	//}
-
-	//5와 4
 	for (auto i : adjacent_list[5])
 	{
 		if (i == 4)
 		{
-			cout << "연결" << '\n';
+			cout << "4諛쒓껄" << '\n';
 		}
 	}
 
-	//0,2 인접행렬
 	if (adjacent_Matrix[0][2])
-		cout << "0,2연결" << '\n';
+		cout << "0,2諛쒓껄" << '\n';
 
-	//5,4
 	if (adjacent_Matrix[5][4])
-		cout << "5,4연결" << '\n';
+		cout << "5,4諛쒓껄" << '\n';
 
 
 	return 0;

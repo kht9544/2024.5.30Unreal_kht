@@ -4,9 +4,9 @@ class Block : public RectCollider
 public:
 	enum class BlockType
 	{
-		ABLE, //0
-		DISABLE, //1
-		PLAYER_POS, //2
+		ABLE, 
+		DISABLE, 
+		PLAYER_POS,
 		PUT_PRINT 
 	};
 

@@ -43,15 +43,12 @@ bool CircleCollider::IsCollision(shared_ptr<CircleCollider> other)
 
 bool CircleCollider::IsCollision(shared_ptr<RectCollider> other)
 {
-	// 과제
-	// AABB(회전하지 않는다는 조건), OBB(회전이 가능하다)
 	Vector2 circleCenter = _center;
 	float radius = _radius;
 
 	Vector2 rectCenter = other->_center;
 	Vector2 rectHalfSize = other->_halfSize;
 
-	// 위 아래 충돌 체크
 	if (circleCenter._x < other->Right() && circleCenter._x > other->Left())
 	{
 		Vector2 newHalfSize = Vector2(rectHalfSize._x, rectHalfSize._y + radius);
@@ -61,7 +58,6 @@ bool CircleCollider::IsCollision(shared_ptr<RectCollider> other)
 			return true;
 	}
 	
-	// 좌 우 충돌 체크
 	else if (circleCenter._y < other->Bottom() && circleCenter._y > other->Top())
 	{
 		Vector2 newHalfSize = Vector2(rectHalfSize._x + radius, rectHalfSize._y);

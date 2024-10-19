@@ -14,7 +14,7 @@ struct Vertex
 	Vertex(int vertexNum, int g) : vertexNum(vertexNum), g(g) {}
 
 	int vertexNum = 0;
-	int g = 0; // °¡ÁßÄ¡
+	int g = 0;
 
 	bool operator<(const Vertex& other)const
 	{

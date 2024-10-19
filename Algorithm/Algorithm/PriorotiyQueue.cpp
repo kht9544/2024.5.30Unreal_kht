@@ -9,9 +9,6 @@
 
 using namespace std;
 
-//우선순위큐
-//1.완전이진트리
-//2.부모가 항상 자식보다 크다
 
 class Priority_queue
 {
@@ -104,8 +101,6 @@ int main()
 	pq.push(40);
 
 
-	// n개에서 m만큼정렬
-	//->partial sort -> m * log n
 	while (true)
 	{
 		if (pq.empty())

@@ -7,9 +7,6 @@
 
 using namespace std;
 
-//BFS
-// (Breadth First Search) -> ³ÐÀÌ ¿ì¼± Å½»ö
-//
 
 vector<vector<bool>>adjacent;
 vector<bool> discovered;
@@ -55,7 +52,7 @@ void BFS(int start)
 	discovered[start] = true;
 	parent[start] = start;
 
-	cout << start << "¹æ¹®" << '\n';
+	cout << start << "ï¿½æ¹®" << '\n';
 
 	queue<int> q;
 	q.push(start);
@@ -75,7 +72,7 @@ void BFS(int start)
 				continue;
 
 			q.push(there);
-			cout << there << "¹ß°ß"<<'\n';
+			cout << there << "ï¿½ß°ï¿½"<<'\n';
 			discovered[there] = true;
 			parent[there] = here;
 		}

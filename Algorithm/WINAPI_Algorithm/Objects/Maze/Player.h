@@ -34,7 +34,6 @@ private:
 
 	shared_ptr<Maze> _maze;
 
-	//DFS
 	vector<vector<bool>>visited;
 	vector<vector<Vector2>> parent;
 };

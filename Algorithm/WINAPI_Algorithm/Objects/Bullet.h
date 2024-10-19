@@ -15,10 +15,7 @@ public:
 	bool IsOut();
 	void OutControll();
 
-	// Attack1
 	void Attack_Cannon(shared_ptr<class Cannon> cannon);
-
-	// Attack2
 	void Attack_Cannon();
 	void SetTarget(shared_ptr<Cannon> cannon) { _target = cannon; }
 
@@ -33,7 +30,6 @@ private:
 	float _lifeTime = 0.0f;
 	float _delayTime = 3.0f;
 
-	// Attack2
 	weak_ptr<Cannon> _target;
 };
 

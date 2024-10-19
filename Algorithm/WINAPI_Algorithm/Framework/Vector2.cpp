@@ -41,8 +41,8 @@ Vector2 Vector2::NormalVector2()
 
 bool Vector2::IsBetween(Vector2 v1, Vector2 v2)
 {
-	float Cross1 = this->Cross(v1); // +
-	float Cross2 = this->Cross(v2); // -
+	float Cross1 = this->Cross(v1); 
+	float Cross2 = this->Cross(v2); 
 
 	bool result = (Cross1 * Cross2) < 0;
 

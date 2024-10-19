@@ -7,10 +7,6 @@
 
 using namespace std;
 
-//DFS
-// ±íÀÌ¿ì¼±Å½»ö Deep First Search
-
-// Àç±ÍÇÔ¼ö
 
 vector<bool> visited;
 vector<vector<bool>>adjacent;
@@ -52,7 +48,7 @@ void CreateGraph_AdjacentMatrix()
 
 void DFS(int here)
 {
-	cout << here << "¹æ¹®" << '\n';
+	cout << here << "ï¿½æ¹®" << '\n';
 	visited[here] = true;
 
 	for (int there = 0; there < adjacent[0].size(); there++)

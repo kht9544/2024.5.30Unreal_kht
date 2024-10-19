@@ -90,10 +90,10 @@ void Player::BFS(Vector2 start)
 	//4방향
 	Vector2 frontPos[4] =
 	{
-		Vector2(0,-1), //UP
-		Vector2(-1,0), //LEFT
-		Vector2(0,1), //BOTTOM
-		Vector2(1,0), //RIGHT
+		Vector2(0,-1), 
+		Vector2(-1,0), 
+		Vector2(0,1), 
+		Vector2(1,0), 
 	};
 
 	vector<vector<bool>>discovered = vector<vector<bool>>(MAXCOUNT_Y,vector<bool>(MAXCOUNT_X,false));
@@ -123,14 +123,13 @@ void Player::BFS(Vector2 start)
 		{
 			Vector2 there = here + frontPos[i];
 
-			//there가 able인지 확인
 			if (!Cango(there._y, there._x))
 				continue;
-			//there가 방문되어있었는지 확인
+			
 			if (discovered[there._y][there._x])
 				continue;
 
-			//탐색했으면 색을 변경
+			
 			_maze->SetBlockType(there._y, there._x, Block::BlockType::PUT_PRINT);
 			q.push(there);
 			discovered[there._y][there._x] = true;
@@ -156,9 +155,6 @@ void Player::Djikstra(Vector2 start)
 
 void Player::RightHand()
 {
-	// 실습
-	// 우수법을 이용해서 미로를 끝점까지 가면 된다.
-	// 찾은 길은 _path에다 넣는다.
 
 	enum Direction
 	{
@@ -178,10 +174,10 @@ void Player::RightHand()
 
 	Vector2 frontPos[4] =
 	{
-		Vector2(0,-1), //UP
-		Vector2(-1,0), //LEFT
-		Vector2(0,1), //BOTTOM
-		Vector2(1,0), //RIGHT
+		Vector2(0,-1), 
+		Vector2(-1,0), 
+		Vector2(0,1), 
+		Vector2(1,0),
 	};
 
 	while (true)
@@ -189,7 +185,6 @@ void Player::RightHand()
 		if (pos == endPos)
 			break;
 
-		//% 순환구조에서 많이 사용
 		int newDir = (dir + 1 + DIR_COUNT) % DIR_COUNT;
 		Vector2 oldDirVector2 = frontPos[dir];
 		Vector2 newDirVector2 = frontPos[newDir];
@@ -197,21 +192,19 @@ void Player::RightHand()
 		Vector2 newPos = pos + newDirVector2;
 		Vector2 oldPos = pos + oldDirVector2; 
 	
-
-		//오른쪽이 막히지 않음
 		if (Cango(newPos._y, newPos._x)) 
 		{
 			dir = static_cast<Direction>(newDir);
 			pos += newDirVector2;
 			_path.push_back(pos);
 		}
-		//오른쪽이 막혀있고 앞으로 갈수 있으면 그대로 전진
+
 		else if (Cango(oldPos._y, oldPos._x))
 		{
 			pos += oldDirVector2;
 			_path.push_back(pos);
 		}
-		//오른쪽,앞 둘다 막히면 왼쪽으로 회전
+
 		else 
 		{
 			dir = static_cast<Direction>((dir - 1 + DIR_COUNT) % DIR_COUNT);
@@ -269,7 +262,6 @@ void Player::Update()
 
 		if (_pathIndex != 0)
 		{
-			//ㅂ라
 			_maze->SetPlayerPos(_pos);
 		}
 
