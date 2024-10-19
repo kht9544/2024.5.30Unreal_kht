@@ -14,12 +14,6 @@ struct Item
 	int atk;
 };
 
-// 람다함수
-// [] () -> {}
-// [캡쳐 : 외부 변수를 복사해서 사용하는 부분]
-// (매개변수)
-// -> 반환자료형
-// { 함수식 }
 
 int main()
 {
@@ -50,7 +44,6 @@ int main()
 	ItemFinder_Tier finder;
 	finder.tier = 0;
 
-	// Call able 객체
 	items.erase(std::remove_if(items.begin(), items.end(), finder), items.end());
 
 	int capture = 1;
@@ -63,7 +56,6 @@ int main()
 
 	}), items.end());
 
-	// Items를 가격순으로 내림차순으로 정렬해주세요
 	std::sort(items.begin(), items.end(), [](Item* a, Item* b) -> bool
 		{
 			if (a->price > b->price)

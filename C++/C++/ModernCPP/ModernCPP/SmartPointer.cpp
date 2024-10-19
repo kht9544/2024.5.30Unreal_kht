@@ -8,25 +8,18 @@
 
 using namespace std;
 
-// shared_ptr
-
-// weak_ptr
-
-// unique_ptr
-
 class Player
 {
 public:
-	Player() { cout << "기본생성자 호출" << endl; }
-	Player(int hp) : _hp(hp) { cout << "타입 변환 생성자 호출" << endl; }
-	~Player() { cout << "소멸자 호출" << endl;  }
+	Player() {}
+	Player(int hp) : _hp(hp) {}
+	~Player() {}
 
 	void Attack()
 	{
 		if (target.expired() == false)
 		{
 			target.lock()->_hp -= 10;
-			cout << "공격!!!" << endl;
 		}
 	}
 
@@ -112,7 +105,6 @@ private:
 
 void PrintPlayer(SharedPtr<Player> player)
 {
-	// cout <<  << endl;
 }
 #pragma endregion
 
@@ -121,15 +113,12 @@ int main()
 	shared_ptr<Player> p1 = make_shared<Player>(5);
 	shared_ptr<Player> p2 = make_shared<Player>(10);
 
-	// shared_ptr의 순환 참조
-	// => weak_ptr로 해결
 	p1->SetTarget(p2);
 	p2->SetTarget(p1);
 
 	p1->Attack();
 	p2->Attack();
 
-	// unique_ptr
 	unique_ptr<Player> p3 = make_unique<Player>();
 
 

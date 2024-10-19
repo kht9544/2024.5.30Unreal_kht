@@ -2,11 +2,6 @@
 
 using namespace std;
 
-// Singleton
-// 1. 전역으로 접근이 가능해야한다.
-// 2. 프로그램에 단 하나만 존재해야한다.
-// 3. 동적할당되어야한다.
-
 class SoundManager
 {
 private:
@@ -14,8 +9,6 @@ private:
 	~SoundManager() {}
 
 public:
-	// private 접근할 수 있는 방법 : public 멤버함수
-	//
 	static void Create()
 	{
 		if(instance == nullptr)
@@ -48,8 +41,8 @@ public:
 
 private:
 	static SoundManager* instance;
-	string _warriorSound = "워리워 등장!";
-	string _archerSound = "아쳐 등장!";
+	string _warriorSound = "Warrior!";
+	string _archerSound = "Archer!";
 };
 
 SoundManager* SoundManager::instance = nullptr;

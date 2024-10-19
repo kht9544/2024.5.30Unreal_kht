@@ -4,7 +4,6 @@
 Creature::Creature()
 : _name("")
 {
-	cout << "CreatureÀÇ ±âº» »ı¼ºÀÚ" << endl;
 	_hp = 0;
 	_mp = 0;
 	_attack = 0;
@@ -14,7 +13,6 @@ Creature::Creature()
 Creature::Creature(int hp, int mp, int attack)
 : _name("")
 {
-	cout << "CreatureÀÇ Å¸ÀÔº¯È¯ »ı¼ºÀÚ" << endl;
 	_hp = hp;
 	_mp = mp;
 	_attack = attack;
@@ -22,7 +20,7 @@ Creature::Creature(int hp, int mp, int attack)
 
 Creature::~Creature()
 {
-	cout << "CreatureÀÇ ¼Ò¸êÀÚ" << endl;
+	cout << "Creature ì†Œë©¸" << endl;
 }
 
 void Creature::PrintCreature()

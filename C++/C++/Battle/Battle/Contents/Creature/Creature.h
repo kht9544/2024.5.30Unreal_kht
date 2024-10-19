@@ -6,10 +6,9 @@ public:
 	virtual ~Creature();
 
 	void Init();
-	// 멤버함수 : 기능
 	void PrintInfo();
 	void PreAttack(Creature* other);
-	virtual void Attack(Creature* other) abstract; // 순수가상함수
+	virtual void Attack(Creature* other) abstract;
 
 	void TakeDamage(int amount, Creature* attacker = nullptr);
 
@@ -17,7 +16,7 @@ public:
 
 	bool isActive = false;
 
-protected: // 멤버변수: 속성
+protected:
 	string _name;
 	int _curHp;
 	int _maxHp;

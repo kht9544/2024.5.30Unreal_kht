@@ -83,12 +83,6 @@ int main()
 		items[i].tier = (10 - i);
 		items[i].atk = 10 * (i + 1);
 	}
-
-	// 함수 포인터를 사용해서
-	// tier가 8인 얘를 찾아서 출력
-
-	// 함수 객체를 사용해서
-	// price가 9000이고 tier 5
 	Finder finder;
 	finder.price = 9000;
 	finder.tier = 5;
@@ -96,8 +90,7 @@ int main()
 	if (item != nullptr)
 		item->PrintItem();
 	item = nullptr;
-	// 함수 객체를 사용해서
-	// price 3000, tier 9, atk 20 얘를 찾아서 출력
+
 	Finder_All finder_All;
 	finder_All.price = 3000;
 	finder_All.tier = 9;
@@ -106,8 +99,6 @@ int main()
 	if (item != nullptr)
 		item->PrintItem();
 
-	// 함수 객체와 템플릿을 사용해서
-	// tier 9, atk 20
 	Finder_Two finder_two;
 	finder_two.tier = 9;
 	finder_two.atk = 20;

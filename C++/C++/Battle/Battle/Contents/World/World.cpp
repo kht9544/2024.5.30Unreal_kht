@@ -67,7 +67,7 @@ void World::SelectPlayer(int num, string name, Creature** creature)
 	{
 	case PlayerType::NONE:
 	{
-		cout << "´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä." << endl;
+		cout << "ï¿½Ù½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½." << endl;
 		break;
 	}
 
@@ -84,7 +84,6 @@ void World::SelectPlayer(int num, string name, Creature** creature)
 
 	default:
 	{
-		cout << "´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä." << endl;
 		break;
 	}
 	break;
@@ -97,9 +96,9 @@ void World::Input()
 	int cumNum = 0;
 	string name;
 	
-	cout << "ÀÌ¸§À» ÀÔ·ÂÇØÁÖ¼¼¿ä" << endl;
+	cout << "Name?" << endl;
 	cin >> name;
-	cout << "1~2±îÁöÀÇ Å¬·¡½º¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä." << endl;
+	cout << "Player Type? " << endl;
 	cin >> playerNum;
 	cumNum = rand() % 2 + 1; // 1 ~ 2
 	SelectPlayer(playerNum, name, &_player);

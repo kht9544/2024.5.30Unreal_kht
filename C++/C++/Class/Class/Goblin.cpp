@@ -18,6 +18,6 @@ void Goblin::Attack(Creature* p)
 {
 	if (IsDead() || p->IsDead()) return;
 
-	cout << "고블린 공격" << endl;
+	cout << "Goblin Attack" << endl;
 	p->TakeDamage(_attack);
 }

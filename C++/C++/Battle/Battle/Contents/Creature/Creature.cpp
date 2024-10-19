@@ -18,8 +18,8 @@ void Creature::Init()
 
 void Creature::PrintInfo()
 {
-	cout << "---- 정보 ----" << endl;
-	cout << "이름 : " << _name << endl;
+	cout << "---------------" << endl;
+	cout << "NAME : " << _name << endl;
 	cout << "HP : " << _curHp << endl;
 	cout << "ATK : " << _atk << endl;
 	cout << "---------------" << endl;
@@ -27,7 +27,7 @@ void Creature::PrintInfo()
 
 void Creature::PreAttack(Creature* other)
 {
-	cout << _name << "이 " << other->_name << "에게 공격을 시도합니다." << endl;
+	cout << _name << "Attack: " << other->_name << endl;
 }
 
 void Creature::TakeDamage(int amount, Creature* attacker)
@@ -36,9 +36,6 @@ void Creature::TakeDamage(int amount, Creature* attacker)
 
 	if (attacker != nullptr && dynamic_cast<Monster*>(this) != nullptr)
 	{
-		// 내가 고블린이고, attacker가 유효하다.
-
-		// attacker가 Player였을 때
 		Player* p = dynamic_cast<Player*>(attacker);
 		if (p != nullptr)
 		{

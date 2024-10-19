@@ -1,6 +1,5 @@
 #pragma once
 
-// 추상클래스
 class Creature
 {
 public:
@@ -12,13 +11,11 @@ public:
 	virtual void Attack(Creature* p) abstract;
 	void TakeDamage(int amount);
 
-	// stat을 재설정하는 함수
 	void SetStat(int hp, int mp, int attack);
 	void SetName(const string& name);
 
 	bool IsDead() { return _hp <= 0; }
 
-	// get set
 	void SetHp(int hp) { _hp = hp; }
 	const int& GetHP() { return _hp; }
 

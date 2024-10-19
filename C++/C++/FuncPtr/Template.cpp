@@ -2,14 +2,6 @@
 
 using namespace std;
 
-// Template
-// Class
-// => 객체(건물)를 찍어내는 설계도
-// Template ... 이 설계도를 찍어내는 얘
-
-// 함수 템플릿 : 함수를 찍어내는 얘
-// 템플릿 기본인자
-// 템플릿의 특수화
 template<typename T = int>
 T Add(T a, T b)
 {
@@ -28,8 +20,7 @@ double Add(double a, double b)
 	return c;
 }
 
-// 클래스 템플릿
-template <typename T = int> // 클래스 템플릿 기본인자
+template <typename T = int> 
 class Player
 {
 public:
@@ -47,7 +38,6 @@ public:
 	int _mp;
 };
 
-// 클래스 템플릿 특수화
 template<>
 class Player<double>
 {

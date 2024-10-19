@@ -2,15 +2,6 @@
 
 using namespace std;
 
-// CPU
-// 메모리
-// CPU
-// - 논리, 연산장치
-// SSD
-// - 비휘발성
-// RAM
-// - 휘발성(프로그램 시작할 때 점유, 종료 시 휘발)
-
 // 컴파일 4단계
 // 1. 전처리기
 //  - 주석 삭제
@@ -25,7 +16,7 @@ using namespace std;
 
 int main()
 {
-	int aInt = 5;
+	cout<<"Hello World"<<endl;
 
 	return 0;
 }

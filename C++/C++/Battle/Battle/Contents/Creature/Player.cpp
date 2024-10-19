@@ -2,7 +2,6 @@
 #include "Player.h"
 
 Player::Player(string name, int hp, int atk)
-// : Creature()
 : Creature(name, hp, atk)
 , _exp(0)
 {
@@ -41,5 +40,5 @@ void Player::LevelUp()
 	_maxHp += maxHp * (0.2f);
 	_atk += atk * (0.2f);
 
-	cout << "·¹º§¾÷!!" << endl;
+	cout << "LevelUp!!" << endl;
 }

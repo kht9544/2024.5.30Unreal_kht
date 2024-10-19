@@ -16,10 +16,8 @@ struct Item
 	int atk;
 };
 
-// 함수로 찾는 방법
 Item* FindItem_Price(Item* arr, int size, int price)
 {
-	// 매개변수 price에 맞는 아이템을 찾아서 return 만약 없다면 nullptr 반환
 	Item* result = nullptr;
 
 	for (int i = 0; i < size; i++)
@@ -31,7 +29,7 @@ Item* FindItem_Price(Item* arr, int size, int price)
 	return result;
 }
 
-// 함수 포인터를 이용해서  찾는 방법
+
 Item* FindItem_FuncPtr(Item* arr, int size ,bool(*func)(const Item&))
 {
 	Item* result = nullptr;
@@ -57,7 +55,6 @@ bool FindItemPtr_Tier(const Item& item)
 	return false;
 }
 
-// 함수 객체로 찾는 방법
 struct Finder
 {
 	bool operator()(const Item& item)
@@ -104,7 +101,7 @@ int main()
 		findItem->PrintItem();
 
 	Finder finder;
-	// 가격 3000인 얘
+
 	finder.itemPrice = 1500;
 	findItem = FindItem_Functor(items, 10, finder);
 	if (findItem != nullptr)

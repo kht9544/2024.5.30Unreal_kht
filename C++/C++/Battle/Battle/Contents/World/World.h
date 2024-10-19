@@ -11,13 +11,13 @@ public:
 
 	World();
 	~World();
-	void Init(); // 초기화
+	void Init(); 
 
 	bool End();
 	bool MonstersCheck();
 
 	void Battle1();
-	void Battle2(); // 과제
+	void Battle2();
 
 private:
 	void SelectPlayer(int num, string name, Creature** creature);

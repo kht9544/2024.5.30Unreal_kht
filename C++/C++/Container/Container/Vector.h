@@ -10,14 +10,14 @@ public:
 	public:
 		Iterator() : ptr(nullptr) {}
 		Iterator(T* otherPtr) : ptr(otherPtr) {}
-		// 복사대입생성자
+
 		Iterator(const Iterator& other) { ptr = other.ptr; }
-		// 복사대입연산자
+
 		Iterator& operator=(const Iterator& other) { ptr = other.ptr; return *this; }
-		// != 비교연산자
+
 		bool operator != (const Iterator & other) { return ptr != other.ptr; }
 		bool operator == (const Iterator & other) { return ptr == other.ptr; }
-		// ++ 증감연산자
+
 		Iterator& operator++()
 		{
 			++ptr;
@@ -32,7 +32,6 @@ public:
 
 			return result;
 		}
-		// * 간접연산자
 		T& operator*()
 		{
 			return (*ptr);

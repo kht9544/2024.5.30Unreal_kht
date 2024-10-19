@@ -6,23 +6,6 @@
 
 using namespace std;
 
-// 1. auto
-// -> 반드시 초기화 해줘야한다.
-// 
-// 2. 중괄호 초기화
-// 
-// 3. 범위기반 for문
-// 
-// 4. final, freind
-// 5. using
-// => typedef 와 다른 장점... 템플릿과 호환이 된다.
-// 
-// 6. enum class
-// 
-// 
-// 7. 람다
-// 8. 이동 shift 개념
-// 9. 스마트 포인터
 
 class Player
 {
@@ -46,7 +29,6 @@ private:
 class HolyKnight : public Knight
 {
 public:
-	//virtual void PrintP() override {}
 };
 
 class KnightHelper

@@ -7,10 +7,6 @@ using namespace std;
 #include "Vector.h"
 #include "List.h"
 
-
-// Iterator
-// 반복자 (순회자)
-
 template<typename T, typename Container>
 void PrintTemp(T t, Container container)
 {
