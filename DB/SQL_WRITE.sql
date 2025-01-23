@@ -5,8 +5,6 @@
 -- 레코드는 개수는 5개 이상
 
 -- SELELCT ->서울에 위치한 식당 목록 출력하기
-
--- SQL : 질의
 -- COMMAND
 
 CREATE DATABASE GameDB;

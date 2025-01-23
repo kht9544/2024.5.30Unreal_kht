@@ -6,13 +6,6 @@
 
 SELECT * FROM PlayerAccount;
 
--- 거래
--- 한일의 템을 제거
--- 한일의 돈이 추가
-
--- 도훈 템이 추가
--- 도훈의 돈이 제거 ... 실패
-
 -- ALL OR NOTHING
 
 -- BEGIN TRAN

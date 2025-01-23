@@ -1,8 +1,5 @@
 USE BaseballData;
 
--- 완전탐색 -> 전력망을 둘로 나누기
--- Join -> 보호소에서 중성화한 동물
-
 -- SQL에서 변수 선언 및 정의
 DECLARE @i AS INT = 10;
 DECLARE @s AS NVARCHAR(15);
@@ -14,7 +11,7 @@ SELECT *
 FROM batting
 WHERE batting.HR >= @i;
 
--- s를 players에서 몸무게가 가장 많이 나가는 player의 이름으로 세팅해주세요.
+-- s를 players에서 몸무게가 가장 많이 나가는 player의 이름으로 세팅
 SET @s = 
 (
 SELECT TOP(1) (nameFirst + ' ' + nameLast) as fullName

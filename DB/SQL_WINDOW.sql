@@ -1,16 +1,5 @@
 USE BaseballData;
 
--- 과제
--- 넌 클러스터드형 인덱스
--- HeapTable...?
--- RID...?
--- 클러스터드형 인덱스
--- 클러스터드형 인덱스가 생기면 HeapTable은 어떻게되는지
-
--- Index Scan과 Index Seek의 차이
--- KEY LOOK UP 과 RID LOOK UP이 무엇인지
-
-
 -- WINDOW 함수
 
 SELECT *

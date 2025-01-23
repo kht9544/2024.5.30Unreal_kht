@@ -8,8 +8,8 @@ SELECT* FROM dbo.players;
 -- ORDER BY
 
 -- DATE TIME
--- Players 테이블에서 모든 사람의 이름과 태어난 날짜, 사망 날짜를 추출해주세요.
--- 단 아직 살아있는 사람은 제외시켜주세요.
+-- Players 테이블에서 모든 사람의 이름과 태어난 날짜, 사망 날짜를 추출
+-- 단 아직 살아있는 사람은 제외
 SELECT nameFirst, nameLast, 
 DATEFROMPARTS(birthYear, birthMonth, birthDay) as 생일 ,
 DATEFROMPARTS(deathYear, deathMonth, deathDay) as 사망날짜,
@@ -30,13 +30,6 @@ WHERE birthCity LIKE 'New_____'; -- '%' wildCard
 -- COUNT
 -- SUM
 -- AVG
-
--- 프로그래머스 문제 (SUM, MAX, MIN)
--- 가장 비싼 상품 구하기
--- 가격이 제일 비싼 식품의 정보 출력하기
--- 최대값 구하기
--- 동물 수 구하기
--- 중복 제거하기
 
 SELECT *
 FROM players;

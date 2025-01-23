@@ -1,17 +1,11 @@
 -- SubQuery
 
--- 기본키와 외래키에 대해서 조사
--- JOIN
--- -> 있었는데요 없었습니다.
--- -> 오랜 기간 보호한 동물
--- -> 그룹별 조건에 맞는 식당 목록 출력하기
-
--- players 테이블에서 birthYear가 1900 이상인 플레이어들의 이름을 추출해라
+-- players 테이블에서 birthYear가 1900 이상인 플레이어들의 이름을 추출
 SELECT birthYear, nameFirst, nameLast
 FROM players
 WHERE birthYear >= 1900;
 
--- 방금 뽑은 위 데이터에서 성이 알파벳 A로 시작하는 사람들의 정보를 추출해라
+-- 방금 뽑은 위 데이터에서 성이 알파벳 A로 시작하는 사람들의 정보를 추출
 SELECT *
 FROM 
 (
@@ -21,12 +15,12 @@ WHERE birthYear >= 1900
 ) T0
 WHERE T0.nameFirst LIKE 'A%';
 
--- players 테이블에서 가장 최근에 태어난 사람의 playerID와 birthYear와 이름을 출력하시오
+-- players 테이블에서 가장 최근에 태어난 사람의 playerID와 birthYear와 이름을 출력
 SELECT TOP(1) playerID, birthYear, nameFirst, nameLast
 FROM players
 ORDER BY birthYear DESC;
 
--- 가장 최근에 태어난 사람의 이름과, 생일 년,월,일을 출력해주세요
+-- 가장 최근에 태어난 사람의 이름과, 생일 년,월,일을 출력
 SELECT nameFirst, nameLast, birthYear, birthMonth, birthDay
 FROM players
 WHERE playerID = 
@@ -91,7 +85,7 @@ FROM players AS pTable
 INNER JOIN salaries AS sTable
 ON pTable.playerID = sTable.playerID -- 외래키
 
--- OUTER JOIN (99퍼로 씀)
+-- OUTER JOIN 
 -- LEFT JOIN / RIGHT JOIN
 -- LEFT JOIN
 -- => playerID가 왼쪽에 있으면 무조건 표시, 이 때 오른쪽에 없으면 오른쪽 정보 무조건 NULL 표시
