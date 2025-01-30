@@ -20,6 +20,7 @@ ACreature::ACreature()
 
 	_isGuarding = false;
 	_StatCom = CreateDefaultSubobject<UStatComponent>(TEXT("StatCom"));
+
 }
 
 // Called when the game starts or when spawned
@@ -41,7 +42,7 @@ void ACreature::PostInitializeComponents()
 
 void ACreature::Disable()
 {
-	SoundManager->PlaySound(*GetDeadSoundName(), this->GetActorLocation());
+	SoundManager->PlaySound(*GetSoundName(ESoundType::DeadSound), this->GetActorLocation());
 	SetActorHiddenInGame(true);
 	SetActorEnableCollision(false);
 
@@ -82,8 +83,8 @@ void ACreature::AttackHit()
 				hitResult.GetActor()->TakeDamage(_StatCom->GetStr(), DamageEvent, GetController(), this);
 
 				_hitPoint = hitResult.ImpactPoint;
-				SoundManager->PlaySound(*GetHitSoundName(), _hitPoint);
-				EffectManager->Play(*GetPlayerAttackHitEffect(), _hitPoint);
+				SoundManager->PlaySound(*GetSoundName(ESoundType::HitSound), _hitPoint);
+				EffectManager->Play(*GetSoundName(ESoundType::PlayerAttackHitEffect), _hitPoint);
 				break;
 			}
 		}
@@ -92,119 +93,41 @@ void ACreature::AttackHit()
 	{
 		FVector missLocation = GetActorLocation();
 
-		SoundManager->PlaySound(*GetSwingSoundName(), missLocation);
+		SoundManager->PlaySound(*GetSoundName(ESoundType::SwingSound), missLocation);
 	}
 }
 
-FString ACreature::GetHitSoundName() const
+FString ACreature::GetSoundName(ESoundType SoundType) const
 {
-	return "default_hit_sound";
+    switch (SoundType)
+    {
+    case ESoundType::HitSound: return "default_hit_sound";
+    case ESoundType::SwingSound: return "default_SwingAttackSound";
+    case ESoundType::GuardOn: return "default_ShieldSound";
+    case ESoundType::GuardOff: return "default_ShieldSound";
+    case ESoundType::DeadSound: return "default_DeadSound";
+    case ESoundType::SkillSound01: return "default_Skill01";
+    case ESoundType::SkillSound02: return "default_Skill02";
+    case ESoundType::SkillSound03: return "default_Skill03";
+    case ESoundType::SkillSound03Shout: return "default_Skill03_Shout";
+    case ESoundType::SkillSound04Start: return "default_Skill04_Start";
+    case ESoundType::SkillSound04Durring: return "default_Skill04_Durring";
+    case ESoundType::BossMonsterAttack: return "default_BossMonsterAttack";
+    case ESoundType::SkillParticleEffect02: return "default_Skill02_Effect";
+    case ESoundType::PlayerAttackHitEffect: return "default_AttackHit_Effect";
+    case ESoundType::EpicAttackFarSound: return "default_Sound";
+    case ESoundType::EpicAttackMagicDotSound: return "default_Sound";
+    case ESoundType::PlayerSkillEffect04Start: return "default_Start";
+    case ESoundType::PlayerSkillEffect04Durring: return "default_Durring";
+    case ESoundType::UIBaseSound: return "default_Sound";
+    case ESoundType::EpicSkeletonEffect: return "default_Effect";
+    case ESoundType::EpicSpawnSound: return "default_Spawn";
+    case ESoundType::LevelUpSound: return "default_LevelUpSound";
+    default: return "Unknown_Sound";
+    }
 }
 
-FString ACreature::GetSwingSoundName() const
-{
-	return "default_SwingAttackSound";
-}
 
-FString ACreature::GetGuardOn() const
-{
-	return "default_ShieldSound";
-}
-
-FString ACreature::GetGuardOff() const
-{
-	return "default_ShieldSound";
-}
-
-FString ACreature::GetDeadSoundName() const
-{
-	return "default_DeadSound";
-}
-
-FString ACreature::GetSkillSound01() const
-{
-	return "default_Skill01";
-}
-
-FString ACreature::GetSkillSound02() const
-{
-	return "default_Skill02";
-}
-
-FString ACreature::GetSkillSound03() const
-{
-	return "default_Skill03";
-}
-
-FString ACreature::GetSkillSound03Shout() const
-{
-	return "default_Skill03_Shout";
-}
-
-FString ACreature::GetSkillSound04Start() const
-{
-	return "default_Skill04_Start";
-}
-
-FString ACreature::GetSkillSound04Durring() const
-{
-	return "default_Skill04_Durring";
-}
-
-FString ACreature::GetBossMonsterAttack() const
-{
-	return "default_BossMonsterAttack";
-}
-
-FString ACreature::GetSkillParticleEffect02() const
-{
-	return "default_Skill02_Effect";
-}
-
-FString ACreature::GetPlayerAttackHitEffect() const
-{
-	return "default_AttackHit_Effect";
-}
-
-FString ACreature::GetEpicAttackFarSound() const
-{
-	return "default_Sound";
-}
-
-FString ACreature::GetEpicAttackMagicDotSound() const
-{
-	return "default_Sound";
-}
-
-FString ACreature::GetPlayerSkillEffect04_Start() const
-{
-	return "default_Start";
-}
-
-FString ACreature::GetPlayerSkillEffect04_Durring() const
-{
-	return "default_Durring";
-}
-
-FString ACreature::GetUIBaseSound() const
-{
-	return "default_Sound";
-}
-
-FString ACreature::GetEpicSkeletonEffect() const
-{
-	return "default_Effect";
-}
-
-FString ACreature::GetEpicSpawnSound() const
-{
-	return "default_Spawn";
-}
-
-FString ACreature::GetLevelUpSound() const
-{
-	return "default_LevelUpSound";
-}
 
 void ACreature::OnAttackEnded(UAnimMontage *Montage, bool bInterrupted)
 {
@@ -229,7 +152,7 @@ float ACreature::TakeDamage(float Damage, struct FDamageEvent const &DamageEvent
 
 	if (_isGuarding && Angle <= GuardAngle)
 	{
-		SoundManager->PlaySound(*GetGuardOn(), _hitPoint);
+		SoundManager->PlaySound(*GetSoundName(ESoundType::GuardOn), _hitPoint);
 	}
 	else
 	{
@@ -239,7 +162,7 @@ float ACreature::TakeDamage(float Damage, struct FDamageEvent const &DamageEvent
 			AnimInstance->PlayHitReactionMontage();
 		}
 
-		SoundManager->PlaySound(*GetGuardOff(), _hitPoint);
+		SoundManager->PlaySound(*GetSoundName(ESoundType::GuardOff), _hitPoint);
 
 		FVector KnockbackDirection = GetActorLocation() - DamageCauser->GetActorLocation();
 		KnockbackDirection.Z = 0.0f;
@@ -249,21 +172,4 @@ float ACreature::TakeDamage(float Damage, struct FDamageEvent const &DamageEvent
 	}
 
 	return 0.0f;
-}
-
-
-void ACreature::PlaySoundEffect(FString SoundName, FVector Location)
-{
-	if (SoundManager)
-	{
-		SoundManager->PlaySound(SoundName, Location);
-	}
-}
-
-void ACreature::PlayEffect(FString EffectName, FVector Location)
-{
-	if (EffectManager)
-	{
-		EffectManager->Play(EffectName, Location);
-	}
 }

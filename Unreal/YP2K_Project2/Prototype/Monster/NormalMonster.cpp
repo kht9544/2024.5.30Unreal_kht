@@ -26,21 +26,6 @@ ANormalMonster::ANormalMonster()
 	_upVector = {0.0f, 0.0f, 200.f};
 }
 
-FString ANormalMonster::GetHitSoundName() const
-{
-	return "NormalMonster_AttackSound";
-}
-
-FString ANormalMonster::GetGuardOff() const
-{
-	return "NormalMonster_TakeDamageSound";
-}
-
-FString ANormalMonster::GetDeadSoundName() const
-{
-	return "NormalMonster_DeathSound";
-}
-
 void ANormalMonster::PlayFindEffect()
 {
 	if (!first)

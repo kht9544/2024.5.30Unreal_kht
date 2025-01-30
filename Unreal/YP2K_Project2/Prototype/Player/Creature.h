@@ -7,7 +7,35 @@
 #include "../Component/StatComponent.h"
 #include "Creature.generated.h"
 
+UENUM(BlueprintType)
+enum class ESoundType : uint8
+{
+    HitSound UMETA(DisplayName = "Hit Sound"),
+    SwingSound UMETA(DisplayName = "Swing Sound"),
+    GuardOn UMETA(DisplayName = "Guard On Sound"),
+    GuardOff UMETA(DisplayName = "Guard Off Sound"),
+    DeadSound UMETA(DisplayName = "Dead Sound"),
+    SkillSound01 UMETA(DisplayName = "Skill Sound 01"),
+    SkillSound02 UMETA(DisplayName = "Skill Sound 02"),
+    SkillSound03 UMETA(DisplayName = "Skill Sound 03"),
+    SkillSound03Shout UMETA(DisplayName = "Skill Sound 03 Shout"),
+    SkillSound04Start UMETA(DisplayName = "Skill Sound 04 Start"),
+    SkillSound04Durring UMETA(DisplayName = "Skill Sound 04 During"),
+    BossMonsterAttack UMETA(DisplayName = "Boss Monster Attack"),
+    SkillParticleEffect02 UMETA(DisplayName = "Skill Particle Effect 02"),
+    PlayerAttackHitEffect UMETA(DisplayName = "Player Attack Hit Effect"),
+    EpicAttackFarSound UMETA(DisplayName = "Epic Attack Far Sound"),
+    EpicAttackMagicDotSound UMETA(DisplayName = "Epic Attack Magic Dot Sound"),
+    PlayerSkillEffect04Start UMETA(DisplayName = "Player Skill Effect 04 Start"),
+    PlayerSkillEffect04Durring UMETA(DisplayName = "Player Skill Effect 04 During"),
+    UIBaseSound UMETA(DisplayName = "UI Base Sound"),
+    EpicSkeletonEffect UMETA(DisplayName = "Epic Skeleton Effect"),
+    EpicSpawnSound UMETA(DisplayName = "Epic Spawn Sound"),
+    LevelUpSound UMETA(DisplayName = "Level Up Sound")
+};
+
 DECLARE_MULTICAST_DELEGATE(Delegate_AttackEnded);
+
 UCLASS()
 class PROTOTYPE_API ACreature : public ACharacter
 {
@@ -30,30 +58,7 @@ public:
 	virtual void Disable();
 	virtual void AttackHit();
 
-	virtual FString GetHitSoundName() const;
-	virtual FString GetSwingSoundName() const;
-	virtual FString GetGuardOn() const;
-	virtual FString GetGuardOff() const;
-	virtual FString GetDeadSoundName() const;
-	virtual FString GetSkillSound01() const;
-	virtual FString GetSkillSound02() const;
-	virtual FString GetSkillSound03() const;
-	virtual FString GetSkillSound03Shout() const;
-	virtual FString GetSkillSound04Start() const;
-	virtual FString GetSkillSound04Durring() const;
-
-	virtual FString GetBossMonsterAttack() const;
-	virtual FString GetSkillParticleEffect02() const;
-	virtual FString GetPlayerAttackHitEffect() const;
-	virtual FString GetEpicAttackFarSound() const;
-	virtual FString GetEpicAttackMagicDotSound() const;
-	virtual FString GetPlayerSkillEffect04_Start() const;
-	virtual FString GetPlayerSkillEffect04_Durring() const;
-	virtual FString GetUIBaseSound() const;
-	virtual FString GetEpicSkeletonEffect() const;
-	virtual FString GetEpicSpawnSound() const;
-	virtual FString GetLevelUpSound() const;
-
+	
 	bool GetIsAttacking() { return _isAttacking; }
 
 	UStatComponent *GetStatComponent() { return _StatCom; }
@@ -69,8 +74,7 @@ public:
 	UUserWidget *GetWidget() const { return _Widget; }
 	int32 GetCurHp() { return _StatCom->GetCurHp(); }
 
-	void PlaySoundEffect(FString SoundName, FVector Location);
-    void PlayEffect(FString EffectName, FVector Location);
+	virtual FString GetSoundName(ESoundType SoundType) const;
 
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))

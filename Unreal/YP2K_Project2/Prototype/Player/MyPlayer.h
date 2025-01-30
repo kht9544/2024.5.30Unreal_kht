@@ -69,23 +69,6 @@ public:
 	float GetVertical() { return _vertical; }
 	float GetHorizontal() { return _horizontal; }
 
-	virtual FString GetSwingSoundName() const override;
-	virtual FString GetHitSoundName() const override;
-	virtual FString GetGuardOn() const override;
-	virtual FString GetGuardOff() const override;
-	virtual FString GetSkillSound01() const override;
-	virtual FString GetSkillSound02() const override;
-	virtual FString GetSkillParticleEffect02() const override;
-	virtual FString GetPlayerAttackHitEffect() const override;
-	virtual FString GetSkillSound03() const override;
-	virtual FString GetSkillSound03Shout() const override;
-	virtual FString GetPlayerSkillEffect04_Start() const override;
-	virtual FString GetPlayerSkillEffect04_Durring() const override;
-	virtual FString GetSkillSound04Start() const override;
-	virtual FString GetSkillSound04Durring() const override;
-	virtual FString GetUIBaseSound() const override;
-	virtual FString GetLevelUpSound() const override;
-
 	FINTERECT interectNPC;
 
 	USkeletalMeshComponent *GetLowerBodyMesh() { return _lowerBodyMesh; }

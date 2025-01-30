@@ -16,10 +16,6 @@ public:
 	// Sets default values for this character's properties
 	ANormalMonster();
 
-	virtual FString GetHitSoundName() const override;
-	virtual FString GetGuardOff() const override;
-	virtual FString GetDeadSoundName() const override;
-
 	void PlayFindEffect();
 
 protected:

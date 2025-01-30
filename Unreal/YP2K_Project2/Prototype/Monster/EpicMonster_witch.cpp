@@ -111,31 +111,6 @@ void AEpicMonster_witch::Attack_AI()
 	}
 }
 
-FString AEpicMonster_witch::GetEpicAttackFarSound() const
-{
-	return "EpicMonsterAttack_Far_Cue";
-}
-
-FString AEpicMonster_witch::GetEpicAttackMagicDotSound() const
-{
-	return "EpicMonsterAttack_MagicDot_Cue";
-}
-
-FString AEpicMonster_witch::GetDeadSoundName() const
-{
-	return "Morigesh_Effort_Death_Cue";
-}
-
-FString AEpicMonster_witch::GetEpicSkeletonEffect() const
-{
-	return "P_Morigesh_Ultimate_Reveal";
-}
-
-FString AEpicMonster_witch::GetEpicSpawnSound() const
-{
-	return "SpawnSound_Cue";
-}
-
 void AEpicMonster_witch::MagicShot()
 {
 
@@ -159,7 +134,7 @@ void AEpicMonster_witch::MagicShot()
 			projectile->FireInDirection(forward);
 		}
 
-		SoundManager->PlaySound(*GetEpicAttackFarSound(), projectile->GetActorLocation());
+		SoundManager->PlaySound(*GetSoundName(ESoundType::EpicAttackFarSound), projectile->GetActorLocation());
 	}
 }
 
@@ -181,8 +156,8 @@ void AEpicMonster_witch::SumonedMonster()
 				if (MeshComponent)
 				{
 					FName SocketName = FName("head");
-					EffectManager->PlayOnSkeletalMesh(*GetEpicSkeletonEffect(), MeshComponent, SocketName);
-					SoundManager->PlaySound(*GetEpicSpawnSound(), GetActorLocation());
+					EffectManager->PlayOnSkeletalMesh(*GetSoundName(ESoundType::EpicSkeletonEffect), MeshComponent, SocketName);
+					SoundManager->PlaySound(*GetSoundName(ESoundType::EpicSpawnSound), GetActorLocation());
 				}
 				Noram->SpawnDefaultController();
 			}
@@ -211,7 +186,7 @@ void AEpicMonster_witch::DecalSKill()
 
 		if (decal)
 		{
-			SoundManager->PlaySound(*GetEpicAttackMagicDotSound(), this->GetActorLocation());
+			SoundManager->PlaySound(*GetSoundName(ESoundType::EpicAttackMagicDotSound), this->GetActorLocation());
 
 			_monster_Epic_AnimInstance->PlayAttackDotrMontage();
 			_curAttackIndex = 0;

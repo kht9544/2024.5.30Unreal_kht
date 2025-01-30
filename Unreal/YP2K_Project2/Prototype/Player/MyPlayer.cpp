@@ -314,86 +314,6 @@ void AMyPlayer::EquipBaseShoulder()
 	}
 }
 
-FString AMyPlayer::GetSwingSoundName() const
-{
-	return "SwingSound_Sword_01";
-}
-
-FString AMyPlayer::GetHitSoundName() const
-{
-	return "TakeSound_Sword_01";
-}
-
-FString AMyPlayer::GetGuardOn() const
-{
-	return "ShieldGuard_On";
-}
-
-FString AMyPlayer::GetGuardOff() const
-{
-	return "ShieldGuard_Off";
-}
-
-FString AMyPlayer::GetSkillSound01() const
-{
-	return "Skill01_Sound";
-}
-
-FString AMyPlayer::GetSkillSound02() const
-{
-	return "Skill02_Sound";
-}
-
-FString AMyPlayer::GetSkillParticleEffect02() const
-{
-	return "NS_Meteor";
-}
-
-FString AMyPlayer::GetPlayerAttackHitEffect() const
-{
-	return "P_Greystone_Novaborn_Primary_Impact";
-}
-
-FString AMyPlayer::GetSkillSound03() const
-{
-	return "Skill03_Sound_Begin_Cue";
-}
-
-FString AMyPlayer::GetSkillSound03Shout() const
-{
-	return "Skill03_Shout";
-}
-
-FString AMyPlayer::GetPlayerSkillEffect04_Start() const
-{
-	return "NS_Skill04_Start";
-}
-
-FString AMyPlayer::GetPlayerSkillEffect04_Durring() const
-{
-	return "NS_Priest_Sphere";
-}
-
-FString AMyPlayer::GetSkillSound04Start() const
-{
-	return "Skill04_Sound_Start";
-}
-
-FString AMyPlayer::GetSkillSound04Durring() const
-{
-	return "Skill04_Sound_02_during";
-}
-
-FString AMyPlayer::GetUIBaseSound() const
-{
-	return "BaseUISound_02_Cue";
-}
-
-FString AMyPlayer::GetLevelUpSound() const
-{
-	return "LevelupSound_Cue";
-}
-
 void AMyPlayer::Move(const FInputActionValue &value)
 {
 	if (_isGuarding)
@@ -552,7 +472,7 @@ void AMyPlayer::Skill1(const FInputActionValue &value)
 
 				DashTimeElapsed = 0.f;
 
-				SoundManager->PlaySound(*GetSkillSound01(), _hitPoint);
+				SoundManager->PlaySound(*GetSoundName(ESoundType::SkillSound01), _hitPoint);
 				DefaultGroundFriction = GetCharacterMovement()->GroundFriction;
 				DefaultBrakingDecelerationWalking = GetCharacterMovement()->BrakingDecelerationWalking;
 
@@ -611,7 +531,7 @@ void AMyPlayer::ConfirmTeleportLocation()
 	{
 		TargetSkillLocation.Z += 100.f;
 		SetActorLocation(TargetSkillLocation);
-		EffectManager->Play("NS_Teleport", TargetSkillLocation);
+		EffectManager->Play(*GetSoundName(ESoundType::PlayerSkillEffect04Start), GetActorLocation());
 
 		bIsTeleportReadyToCast = false;
 
@@ -753,7 +673,7 @@ void AMyPlayer::ConfirmSkillLocation()
 		PlayerAnimInstance->PlaySkill02Montage();
 	}
 
-	SoundManager->PlaySound(*GetSkillSound02(), _hitPoint);
+	SoundManager->PlaySound(*GetSoundName(ESoundType::SkillSound02), _hitPoint);
 }
 
 void AMyPlayer::Skill3(const FInputActionValue &value)
@@ -771,8 +691,8 @@ void AMyPlayer::Skill3(const FInputActionValue &value)
 			UIManager->GetSkillUI()->StartCooldown(2, 5.0f);
 			if (_fireball != nullptr)
 			{
-				SoundManager->PlaySound(*GetSkillSound03(), this->GetActorLocation());
-				SoundManager->PlaySound(*GetSkillSound03Shout(), this->GetActorLocation());
+				SoundManager->PlaySound(*GetSoundName(ESoundType::SkillSound03), this->GetActorLocation());
+				SoundManager->PlaySound(*GetSoundName(ESoundType::SkillSound03Shout), this->GetActorLocation());
 
 				UPlayerAnimInstance *PlayerAnimInstance = Cast<UPlayerAnimInstance>(GetMesh()->GetAnimInstance());
 				if (PlayerAnimInstance)
@@ -819,11 +739,11 @@ void AMyPlayer::Skill4(const FInputActionValue &value)
 			SkillOnCooldown[3] = true;
 			UIManager->GetSkillUI()->StartCooldown(3, 10.0f);
 
-			EffectManager->Play(*GetPlayerSkillEffect04_Start(), GetActorLocation());
-			SoundManager->PlaySound(*GetSkillSound04Start(), GetActorLocation());
+			EffectManager->PlayOnSkeletalMesh(*GetSoundName(ESoundType::PlayerSkillEffect04Start), _lowerBodyMesh, "root");
+			SoundManager->PlaySound(*GetSoundName(ESoundType::SkillSound04Start), GetActorLocation());
 
-			EffectManager->PlayOnSkeletalMesh(*GetPlayerSkillEffect04_Durring(), _lowerBodyMesh, "root");
-			SoundManager->PlaySoundWithDuration(*GetSkillSound04Durring(), GetActorLocation(), 5.0f);
+			EffectManager->PlayOnSkeletalMesh(*GetSoundName(ESoundType::PlayerSkillEffect04Durring), _lowerBodyMesh, "root");
+			SoundManager->PlaySoundWithDuration(*GetSoundName(ESoundType::SkillSound04Durring), GetActorLocation(), 5.0f);
 		}
 	}
 }
@@ -919,7 +839,7 @@ void AMyPlayer::StatUIOpen(const FInputActionValue &value)
 	bool isPressed = value.Get<bool>();
 
 	auto statUI = UIManager->GetStatUI();
-	SoundManager->PlaySound(*GetUIBaseSound(), GetActorLocation());
+	SoundManager->PlaySound(*GetSoundName(ESoundType::UIBaseSound), GetActorLocation());
 
 	if (isPressed && statUI != nullptr)
 	{
@@ -932,7 +852,7 @@ void AMyPlayer::InvenUIOpen(const FInputActionValue &value)
 	bool isPressed = value.Get<bool>();
 
 	auto invenUI = UIManager->GetInventoryUI();
-	SoundManager->PlaySound(*GetUIBaseSound(), GetActorLocation());
+	SoundManager->PlaySound(*GetSoundName(ESoundType::UIBaseSound), GetActorLocation());
 
 	if (isPressed && invenUI != nullptr)
 	{
