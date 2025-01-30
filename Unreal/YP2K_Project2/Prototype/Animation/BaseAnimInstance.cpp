@@ -5,7 +5,6 @@
 #include "KismetAnimationLibrary.h"
 #include "../Player/Creature.h"
 #include "../Player/MyPlayer.h"
-#include "../Player/Dragon.h"
 #include "GameFramework/PawnMovementComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
@@ -27,18 +26,6 @@ void UBaseAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	if (myCharacter != nullptr)
 	{
 		_speed = myCharacter->GetVelocity().Size();
-
-		if (ADragon *Dragon = Cast<ADragon>(myCharacter))
-		{
-			if (Dragon->GetCharacterMovement()->IsFalling())
-			{
-				Dragon->GetCharacterMovement()->MaxFlySpeed = _speed;
-			}
-			else
-			{
-				Dragon->GetCharacterMovement()->MaxFlySpeed = 600.0f;
-			}
-		}
 
 		_isFalling = myCharacter->GetMovementComponent()->IsFalling();
 		_Direction = UKismetAnimationLibrary::CalculateDirection(myCharacter->GetVelocity(), myCharacter->GetActorRotation());

@@ -163,8 +163,8 @@ void UStatComponent::SetBossLevelInit(int level)
 
 		_nextExp = Data->EXP;
 
-		_attackRadius = 50.0f;
-		_attackRange = 300.0f;
+		_attackRadius = 100.0f;
+		_attackRange = 500.0f;
 
 		SetHp(_maxHp);
 		SetMp(_maxMp);

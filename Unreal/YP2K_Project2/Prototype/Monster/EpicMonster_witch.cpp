@@ -45,19 +45,13 @@ void AEpicMonster_witch::BeginPlay()
 void AEpicMonster_witch::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
+	_StatCom->SetEpicLevelInit(1);
+}
 
-	if (_StatCom)
-	{
-		_StatCom->SetEpicLevelInit(1);
-	}
-
-	_monster_Epic_AnimInstance = Cast<UMonster_Epic01_Anim>(GetMesh()->GetAnimInstance());
-	if (_monster_Epic_AnimInstance->IsValidLowLevelFast())
-	{
-		_monster_Epic_AnimInstance->OnMontageEnded.AddDynamic(this, &ACreature::OnAttackEnded);
-		_monster_Epic_AnimInstance->_attackDelegate.AddUObject(this, &ACreature::AttackHit);
-		_monster_Epic_AnimInstance->_deathDelegate.AddUObject(this, &AMonster::Disable);
-	}
+void AEpicMonster_witch::InitalizeAnim()
+{
+	Super::InitalizeAnim();
+	_monster_Epic_AnimInstance = Cast<UMonster_Epic01_Anim>(_monster_AnimInstance);
 }
 
 void AEpicMonster_witch::Tick(float DeltaTime)

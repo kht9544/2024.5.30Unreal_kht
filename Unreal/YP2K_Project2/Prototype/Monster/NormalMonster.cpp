@@ -61,15 +61,15 @@ void ANormalMonster::BeginPlay()
 void ANormalMonster::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
-
-	_monster_N_AnimInstance = Cast<UMonster_N_AnimInstance>(GetMesh()->GetAnimInstance());
-	if (_monster_N_AnimInstance->IsValidLowLevelFast())
-	{
-		_monster_N_AnimInstance->OnMontageEnded.AddDynamic(this, &ACreature::OnAttackEnded);
-		_monster_N_AnimInstance->_attackDelegate.AddUObject(this, &ACreature::AttackHit);
-		_monster_N_AnimInstance->_deathDelegate.AddUObject(this, &AMonster::Disable);
-	}
 	_StatCom->SetMonsterLevelInit(1);
+}
+
+void ANormalMonster::InitalizeAnim()
+{
+ 	  Super::InitalizeAnim();
+
+	 _monster_N_AnimInstance = Cast<UMonster_N_AnimInstance>(_monster_AnimInstance);
+
 }
 
 void ANormalMonster::Attack_AI()

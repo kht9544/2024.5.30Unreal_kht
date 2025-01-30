@@ -35,6 +35,7 @@ public:
 private:
 	virtual void BeginPlay() override;
 	virtual void PostInitializeComponents() override;
+	virtual void InitalizeAnim() override;
 	virtual void Attack_AI() override;
 	virtual float TakeDamage(float Damage, struct FDamageEvent const &DamageEvent, AController *EventInstigator, AActor *DamageCauser);
 	virtual void Tick(float DeltaTime) override;

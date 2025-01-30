@@ -48,15 +48,15 @@ void ABoss2Monster::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
 
-	_bossMonster02_AnimInstance = Cast<UMonster_Boss2_AnimInstance>(GetMesh()->GetAnimInstance());
-	if (_bossMonster02_AnimInstance->IsValidLowLevelFast())
-	{
-		_bossMonster02_AnimInstance->OnMontageEnded.AddDynamic(this, &ACreature::OnAttackEnded);
-		_bossMonster02_AnimInstance->_attackDelegate.AddUObject(this, &ACreature::AttackHit);
-		_bossMonster02_AnimInstance->_deathDelegate.AddUObject(this, &AMonster::Disable);
-		_bossMonster02_AnimInstance->_skillDelegate.AddDynamic(this, &ABoss2Monster::FireballAttack);
-	}
 	_StatCom->SetBossLevelInit(1);
+}
+
+void ABoss2Monster::InitalizeAnim()
+{
+	  Super::InitalizeAnim();
+
+	  _bossMonster02_AnimInstance = Cast<UMonster_Boss2_AnimInstance>(_monster_AnimInstance);
+	  _bossMonster02_AnimInstance->_skillDelegate.AddDynamic(this, &ABoss2Monster::FireballAttack);
 }
 
 void ABoss2Monster::FireballAttack(FVector Location)
@@ -129,35 +129,8 @@ FVector ABoss2Monster::UpdatedLocation()
 
 float ABoss2Monster::TakeDamage(float Damage, struct FDamageEvent const &DamageEvent, AController *EventInstigator, AActor *DamageCauser)
 {
-	UBaseAnimInstance *AnimInstance = Cast<UBaseAnimInstance>(GetMesh()->GetAnimInstance());
+	Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
 
-	APlayerController *PlayerController = GetWorld()->GetFirstPlayerController();
-	if (!PlayerController)
-		return 0.0f;
-
-	AMyPlayer *player = Cast<AMyPlayer>(PlayerController->GetPawn());
-
-	if (AnimInstance)
-	{
-		AnimInstance->PlayHitReactionMontage();
-	}
-
-	SoundManager->PlaySound(*GetGuardOff(), _hitPoint);
-
-	_StatCom->AddCurHp(-Damage);
-
-	if (_StatCom->IsDead())
-	{
-		SoundManager->PlaySound(*GetDeadSoundName(), _hitPoint);
-
-		SetActorEnableCollision(false);
-		auto controller = GetController();
-		if (controller)
-			GetController()->UnPossess();
-		player->GetStatComponent()->AddExp(_StatCom->GetNextExp());
-		player->GetInventory()->AddMoney(2000);
-		GetWorld()->GetTimerManager().SetTimer(TimerHandle_Destroy, this, &ACreature::DelayedDestroy, 2.0f, false);
-	}
 
 	return 0.0f;
 }
@@ -168,57 +141,6 @@ void ABoss2Monster::Attack_AI()
 	{
 		_isAttacking = true;
 		_bossMonster02_AnimInstance->PlayAttackMontage();
-	}
-}
-
-void ABoss2Monster::AttackHit()
-{
-	TArray<FHitResult> hitResults;
-	FCollisionQueryParams params(NAME_None, false, this);
-
-	float attackRange = 1000.0f;
-	float attackRadius = 200.0f;
-
-	bool bResult = GetWorld()->SweepMultiByChannel(
-		hitResults,
-		GetActorLocation(),
-		GetActorLocation() + GetActorForwardVector() * attackRange,
-		FQuat::Identity,
-		ECollisionChannel::ECC_GameTraceChannel2,
-		FCollisionShape::MakeSphere(attackRadius),
-		params);
-
-	FVector vec = GetActorForwardVector() * attackRange;
-	FVector center = GetActorLocation() + vec * 0.5f;
-
-	FColor drawColor = FColor::Green;
-
-	if (bResult)
-	{
-		drawColor = FColor::Red;
-
-		for (auto &hitResult : hitResults)
-		{
-
-			if (hitResult.GetActor() && hitResult.GetActor()->IsValidLowLevel())
-			{
-				FDamageEvent DamageEvent;
-				hitResult.GetActor()->TakeDamage(_StatCom->GetStr(), DamageEvent, GetController(), this);
-
-				_hitPoint = hitResult.ImpactPoint;
-				SoundManager->PlaySound(*GetHitSoundName(), _hitPoint);
-				EffectManager->Play(*GetPlayerAttackHitEffect(), _hitPoint);
-
-				EffectManager->Play(*GetBoss2AttackEffect(), _hitPoint);
-
-				break;
-			}
-		}
-	}
-	else
-	{
-		FVector missLocation = GetActorLocation();
-		SoundManager->PlaySound(*GetSwingSoundName(), missLocation);
 	}
 }
 

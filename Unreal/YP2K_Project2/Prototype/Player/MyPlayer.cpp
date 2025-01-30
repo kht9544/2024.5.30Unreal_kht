@@ -44,7 +44,6 @@
 #include "Components/AudioComponent.h"
 #include "Components/DecalComponent.h"
 
-#include "Player/Dragon.h"
 #include "UI/PlayerBarWidget.h"
 
 // Sets default values
@@ -142,15 +141,6 @@ void AMyPlayer::BeginPlay()
 	UIManager->SetPlayerUI(_StatCom);
 
 	SkillOnCooldown.Init(false, 4);
-
-	if (DragonClass)
-	{
-		FVector SpawnLocation = GetActorLocation();
-		FRotator SpawnRotation = GetActorRotation();
-		FActorSpawnParameters SpawnParams;
-		SpawnParams.Owner = this;
-		_dragonInstance = GetWorld()->SpawnActor<ADragon>(DragonClass, SpawnLocation, SpawnRotation, SpawnParams);
-	}
 }
 
 void AMyPlayer::PostInitializeComponents()
@@ -162,7 +152,7 @@ void AMyPlayer::PostInitializeComponents()
 	{
 		_KnightanimInstance->OnMontageEnded.AddDynamic(this, &AMyPlayer::OnAttackEnded);
 		_KnightanimInstance->_attackDelegate.AddUObject(this, &ACreature::AttackHit);
-		_KnightanimInstance->_deathDelegate.AddUObject(this, &AMyPlayer::Disable);
+		_KnightanimInstance->_deathDelegate.AddUObject(this, &ACreature::Disable);
 		_KnightanimInstance->_comboDelegate.AddUObject(this, &AMyPlayer::NextCombo);
 	}
 }
@@ -180,63 +170,22 @@ void AMyPlayer::Tick(float DeltaTime)
 
 float AMyPlayer::TakeDamage(float Damage, struct FDamageEvent const &DamageEvent, AController *EventInstigator, AActor *DamageCauser)
 {
-
-	FVector AttackDirection = DamageCauser->GetActorLocation() - GetActorLocation();
-	AttackDirection.Z = 0.0f;
-	AttackDirection.Normalize();
-
-	FVector GuardDirection = GetActorForwardVector();
-
-	float DotProduct = FVector::DotProduct(GuardDirection, AttackDirection);
-	float Angle = FMath::Acos(DotProduct) * (180.0f / PI);
-
-	const float GuardAngle = 90.0f;
-
-	if (bIsGuarding && Angle <= GuardAngle)
+	Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
+	
+	if (_StatCom->IsDead())
 	{
-		SoundManager->PlaySound(*GetGuardOn(), _hitPoint);
-	}
-	else
-	{
-		UBaseAnimInstance *AnimInstance = Cast<UBaseAnimInstance>(GetMesh()->GetAnimInstance());
-		if (AnimInstance)
+		UMyGameInstance *GameInstance = Cast<UMyGameInstance>(GetGameInstance());
+		if (GameInstance)
 		{
-			AnimInstance->PlayHitReactionMontage();
-		}
-
-		SoundManager->PlaySound(*GetGuardOff(), _hitPoint);
-
-		FVector KnockbackDirection = GetActorLocation() - DamageCauser->GetActorLocation();
-		KnockbackDirection.Z = 0.0f;
-		KnockbackDirection.Normalize();
-		LaunchCharacter(KnockbackDirection * 1000.f, true, true);
-		_StatCom->AddCurHp(-Damage);
-
-		if (_StatCom->IsDead())
-		{
-			SoundManager->PlaySound(*GetDeadSoundName(), this->GetActorLocation());
-
-			SetActorEnableCollision(false);
-			auto controller = GetController();
-			if (controller)
-				GetController()->UnPossess();
-
-			GetWorld()->GetTimerManager().SetTimer(TimerHandle_Destroy, this, &ACreature::DelayedDestroy, 2.0f, false);
-
-			UMyGameInstance *GameInstance = Cast<UMyGameInstance>(GetGameInstance());
-			if (GameInstance)
-			{
-				UIManager->CloseAll();
-				UIManager->OpenUI(UI_LIST::Load);
-				GameInstance->SavePlayerStats(_StatCom);
-				GameInstance->SaveInventory(_inventoryComponent);
-				GameInstance->SavePlayerSkeletal(this);
-				FName Map = TEXT("NewMap");
-				UGameplayStatics::OpenLevel(GetWorld(), Map);
-			}
+			UIManager->CloseAll();
+			UIManager->OpenUI(UI_LIST::Load);
+			GameInstance->SavePlayerStats(_StatCom);
+			GameInstance->SaveInventory(_inventoryComponent);
+			GameInstance->SavePlayerSkeletal(this);
+			FName Map = TEXT("NewMap");
+			UGameplayStatics::OpenLevel(GetWorld(), Map);
 		}
 	}
-
 	return 0.0f;
 }
 
@@ -263,7 +212,6 @@ void AMyPlayer::SetupPlayerInputComponent(UInputComponent *PlayerInputComponent)
 		EnhancedInputComponent->BindAction(_InteractAction, ETriggerEvent::Started, this, &AMyPlayer::Interect);
 
 		EnhancedInputComponent->BindAction(_OptionsAction, ETriggerEvent::Started, this, &AMyPlayer::OptionsOpen);
-		EnhancedInputComponent->BindAction(_Change, ETriggerEvent::Started, this, &AMyPlayer::ToggleTransformation);
 	}
 }
 
@@ -448,7 +396,7 @@ FString AMyPlayer::GetLevelUpSound() const
 
 void AMyPlayer::Move(const FInputActionValue &value)
 {
-	if (bIsGuarding)
+	if (_isGuarding)
 		return;
 	FVector2D MovementVector = value.Get<FVector2D>();
 
@@ -519,8 +467,8 @@ void AMyPlayer::AttackA(const FInputActionValue &value)
 
 	if (isPressed && _isAttacking == false && _KnightanimInstance != nullptr)
 	{
-		if (bIsGuarding)
-			bIsGuarding = false;
+		if (_isGuarding)
+			_isGuarding = false;
 
 		_isAttacking = true;
 
@@ -903,12 +851,12 @@ void AMyPlayer::Mouse(const FInputActionValue &value)
 
 void AMyPlayer::GuardEnd(const FInputActionValue &value)
 {
-	bIsGuarding = false;
+	_isGuarding = false;
 
 	UPlayerAnimInstance *PlayerAnimInstance = Cast<UPlayerAnimInstance>(GetMesh()->GetAnimInstance());
 	if (PlayerAnimInstance)
 	{
-		PlayerAnimInstance->PlayGuardMontage(bIsGuarding);
+		PlayerAnimInstance->PlayGuardMontage(_isGuarding);
 	}
 }
 
@@ -941,11 +889,8 @@ void AMyPlayer::LockOn(const FInputActionValue &value)
 				FCollisionQueryParams CollisionParams;
 				CollisionParams.bTraceComplex = true;
 				CollisionParams.AddIgnoredActor(this);
-				DrawDebugLine(GetWorld(), Start, End, FColor::Green, false, 2.0f, 0, 1.0f);
-
 				if (GetWorld()->LineTraceSingleByChannel(HitResult, Start, End, ECC_Pawn, CollisionParams))
 				{
-					DrawDebugLine(GetWorld(), Start, End, FColor::Red, false, 2.0f, 0, 1.0f);
 					AMonster *monster = Cast<AMonster>(HitResult.GetActor());
 					if (monster != nullptr)
 					{
@@ -960,12 +905,12 @@ void AMyPlayer::LockOn(const FInputActionValue &value)
 
 void AMyPlayer::GuardStart(const FInputActionValue &value)
 {
-	bIsGuarding = true;
+	_isGuarding = true;
 
 	UPlayerAnimInstance *PlayerAnimInstance = Cast<UPlayerAnimInstance>(GetMesh()->GetAnimInstance());
 	if (PlayerAnimInstance)
 	{
-		PlayerAnimInstance->PlayGuardMontage(bIsGuarding);
+		PlayerAnimInstance->PlayGuardMontage(_isGuarding);
 	}
 }
 
@@ -1048,99 +993,3 @@ void AMyPlayer::StartScreenShake()
 	}
 }
 
-void AMyPlayer::TransformToDragon()
-{
-	if (!GAMEINSTANCE->GetStage2Clear())
-		return;
-
-	if (!_dragonInstance)
-	{
-		FVector SpawnLocation = GetActorLocation();
-		FRotator SpawnRotation = GetActorRotation();
-		FActorSpawnParameters SpawnParams;
-		SpawnParams.Owner = this;
-
-		_dragonInstance = GetWorld()->SpawnActor<ADragon>(DragonClass, SpawnLocation, SpawnRotation, SpawnParams);
-		if (!_dragonInstance)
-		{
-			return;
-		}
-	}
-
-	if (APlayerController *PC = Cast<APlayerController>(GetController()))
-	{
-		_dragonInstance->SetActorHiddenInGame(false);
-		_dragonInstance->SetActorEnableCollision(true);
-
-		_dragonInstance->SetActorLocation(GetActorLocation());
-		_dragonInstance->SetActorRotation(GetActorRotation());
-
-		SetActorHiddenInGame(true);
-		SetActorEnableCollision(false);
-
-		PC->Possess(_dragonInstance);
-
-		bIsTransformed = true;
-		_dragonInstance->bIsTransformed = true;
-	}
-}
-
-void AMyPlayer::TransformToHuman()
-{
-	_dragonInstance->TransformToHuman();
-}
-
-void AMyPlayer::ToggleTransformation()
-{
-	if (!_bCanTransform)
-	{
-		return;
-	}
-
-	if (bIsTransformed)
-	{
-		TransformToHuman();
-	}
-	else
-	{
-		UPlayerAnimInstance *AnimInstance = Cast<UPlayerAnimInstance>(GetMesh()->GetAnimInstance());
-		if (AnimInstance)
-		{
-			AnimInstance->PlayChangeMontage();
-
-			AnimInstance->OnMontageEnded.AddDynamic(this, &AMyPlayer::HandleMontageEnd);
-			StartTransformationCooldown();
-		}
-	}
-}
-
-void AMyPlayer::HandleMontageEnd(UAnimMontage *Montage, bool bInterrupted)
-{
-	UPlayerAnimInstance *AnimInstance = Cast<UPlayerAnimInstance>(GetMesh()->GetAnimInstance());
-	if (AnimInstance && Montage == AnimInstance->GetChangeMontage())
-	{
-		if (!bInterrupted && !bIsTransformed)
-		{
-			TransformToDragon();
-		}
-
-		AnimInstance->OnMontageEnded.RemoveDynamic(this, &AMyPlayer::HandleMontageEnd);
-	}
-}
-
-void AMyPlayer::StartTransformationCooldown()
-{
-	_bCanTransform = false;
-
-	GetWorldTimerManager().SetTimer(
-		_transformCooldownHandle,
-		this,
-		&AMyPlayer::ResetTransformationCooldown,
-		_transformCooldown,
-		false);
-}
-
-void AMyPlayer::ResetTransformationCooldown()
-{
-	_bCanTransform = true;
-}

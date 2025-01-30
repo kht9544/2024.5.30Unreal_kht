@@ -24,26 +24,11 @@ public:
 
 	virtual void BeginPlay() override;
 	virtual void PostInitializeComponents() override;
+	virtual void InitalizeAnim();
 
 	UFUNCTION()
 	virtual void Disable() override;
-
-	virtual void AttackHit() override;
-
-	virtual void Attack_AI(){};
-	
-
-	UPROPERTY(BlueprintAssignable, Category = "Events")
-	FMonsterDelegate MonsterEvent;
-
-protected:
-	virtual void DropReword();
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
-    class UCapsuleComponent* _capsuleComponent;
-
-
-public:
+	virtual void Attack_AI();
 	virtual float TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 
 	void LaunchFromPlayer(FVector LaunchDirection);
@@ -64,5 +49,13 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Physics", meta = (AllowPrivateAccess = "true"))
 	class ABaseItem *_newItem = nullptr;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+    class UCapsuleComponent* _capsuleComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Animation", meta = (AllowPrivateAccess = "true"))
+	class UBaseAnimInstance * _monster_AnimInstance;
+	
+	int32 RandomSectionIndex;
 
 };

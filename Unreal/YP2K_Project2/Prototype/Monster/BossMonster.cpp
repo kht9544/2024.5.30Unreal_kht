@@ -51,90 +51,39 @@ void ABossMonster::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
 
-	_bossMonster01_AnimInstance = Cast<UMonster_Boss01_AnimInstance>(GetMesh()->GetAnimInstance());
-	if (_bossMonster01_AnimInstance->IsValidLowLevelFast())
-	{
-		_bossMonster01_AnimInstance->OnMontageEnded.AddDynamic(this, &ACreature::OnAttackEnded);
-		_bossMonster01_AnimInstance->_attackDelegate.AddUObject(this, &ACreature::AttackHit);
-		_bossMonster01_AnimInstance->_deathDelegate.AddUObject(this, &AMonster::Disable);
-		_bossMonster01_AnimInstance->_stunDelegate.AddUObject(this, &ABossMonster::StunEnd);
-	}
-
 	_StatCom->SetBossLevelInit(1);
+}
+
+void ABossMonster::InitalizeAnim()
+{
+	Super::InitalizeAnim();
+	_bossMonster01_AnimInstance = Cast<UMonster_Boss01_AnimInstance>(_monster_AnimInstance);
+	_bossMonster01_AnimInstance->_stunDelegate.AddUObject(this, &ABossMonster::StunEnd);
 }
 
 void ABossMonster::Attack_AI()
 {
-	if (_isAttacking == false && _bossMonster01_AnimInstance != nullptr)
+	Super::Attack_AI();
+
+	FString soundKey;
+	if (RandomSectionIndex == 1)
 	{
-		_isAttacking = true;
-		int32 RandomSectionIndex = FMath::RandRange(1, 3);
-		_bossMonster01_AnimInstance->PlayAttackMontage();
-		_bossMonster01_AnimInstance->JumpToSection(RandomSectionIndex);
-
-		FString soundKey;
-		if (RandomSectionIndex == 1)
-		{
-			soundKey = "BossMonsterAttack_Hard";
-		}
-		else if (RandomSectionIndex == 2)
-		{
-			soundKey = "BossMonsterPunch";
-		}
-		else if (RandomSectionIndex == 3)
-		{
-			soundKey = "BossMonsterPunch";
-		}
-
-		if (SoundManager && !soundKey.IsEmpty())
-		{
-			FTimerHandle TimerHandle;
-			GetWorld()->GetTimerManager().SetTimer(TimerHandle, [this, soundKey]()
-												   { SoundManager->PlaySound(soundKey, GetActorLocation()); }, 0.1f, false);
-		}
+		soundKey = "BossMonsterAttack_Hard";
 	}
+	else if (RandomSectionIndex == 2)
+	{
+		soundKey = "BossMonsterPunch";
+	}
+	else if (RandomSectionIndex == 3)
+	{
+		soundKey = "BossMonsterPunch";
+	}
+	SoundManager->PlaySound(soundKey, GetActorLocation());
 }
 
 float ABossMonster::TakeDamage(float Damage, struct FDamageEvent const &DamageEvent, AController *EventInstigator, AActor *DamageCauser)
 {
-	UBaseAnimInstance *AnimInstance = Cast<UBaseAnimInstance>(GetMesh()->GetAnimInstance());
-
-	APlayerController *PlayerController = GetWorld()->GetFirstPlayerController();
-	if (!PlayerController)
-		return 0.0f;
-
-	AMyPlayer *player = Cast<AMyPlayer>(PlayerController->GetPawn());
-
-	if (AnimInstance)
-	{
-		AnimInstance->PlayHitReactionMontage();
-	}
-
-	SoundManager->PlaySound(*GetGuardOff(), _hitPoint);
-
-	if (ObstacleDestroyCount >= 5)
-	{
-		_StatCom->AddCurHp(-Damage);
-	}
-	else
-	{
-		_StatCom->AddCurHp(-Damage / (5 - ObstacleDestroyCount));
-	}
-
-	if (_StatCom->IsDead())
-	{
-		SoundManager->PlaySound(*GetDeadSoundName(), _hitPoint);
-
-		SetActorEnableCollision(false);
-		auto controller = GetController();
-		if (controller)
-			GetController()->UnPossess();
-		player->GetStatComponent()->AddExp(_StatCom->GetNextExp());
-		player->GetInventory()->AddMoney(1000);
-
-		GetWorld()->GetTimerManager().SetTimer(TimerHandle_Destroy, this, &ACreature::DelayedDestroy, 2.0f, false);
-	}
-
+	Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
 	return 0.0f;
 }
 

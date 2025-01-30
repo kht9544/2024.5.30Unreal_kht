@@ -159,8 +159,6 @@ public:
 
 	bool IsDead() { return _curHp <= 0; }
 
-	DeathDelegate _deathDelegate;
-
 	float EXpRatio() { return _curExp / (float)_nextExp; }
 	PlHP _PlHPDelegate;
 	PlMaxHP _PlMaxHPDelegate;
@@ -168,6 +166,7 @@ public:
 	PlMaxMP _PlMaxMPDelegate;
 	PIEXP _PlEXPDelegate;
 	PILevel _PILevelDelegate;
+	DeathDelegate _deathDelegate;
 
 	int32 GetBaseStat(StatType statType) const;
 	void DecreaseStat(StatType stat, int32 amount);

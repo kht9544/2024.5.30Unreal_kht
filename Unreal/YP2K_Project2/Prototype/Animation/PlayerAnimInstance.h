@@ -19,7 +19,7 @@ class PROTOTYPE_API UPlayerAnimInstance : public UBaseAnimInstance
 public:
 	UPlayerAnimInstance();
 
-	void PlayGuardMontage(bool bIsGuarding);
+	void PlayGuardMontage(bool _isGuarding);
 	void StopGuardMontage();
 
 	void PlaySkill01Montage();

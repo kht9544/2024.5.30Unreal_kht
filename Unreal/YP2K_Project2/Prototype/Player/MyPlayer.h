@@ -257,28 +257,4 @@ private:
 
     float DefaultGroundFriction;
     float DefaultBrakingDecelerationWalking;
-
-	//------- Dragon 변신 -------
-
-public:
-	void TransformToDragon();
-	void TransformToHuman();
-
-	void ToggleTransformation();
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Transformation")
-	TSubclassOf<ADragon> DragonClass;
-
-private:
-	class ADragon *_dragonInstance;
-
-	UFUNCTION()
-	void HandleMontageEnd(UAnimMontage *Montage, bool bInterrupted);
-
-	bool _bCanTransform = true;
-	float _transformCooldown = 3.0f;
-	FTimerHandle _transformCooldownHandle;
-
-	void StartTransformationCooldown();
-	void ResetTransformationCooldown();
 };

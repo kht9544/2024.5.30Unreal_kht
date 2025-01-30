@@ -59,9 +59,9 @@ UPlayerAnimInstance::UPlayerAnimInstance()
 	}
 }
 
-void UPlayerAnimInstance::PlayGuardMontage(bool bIsGuarding)
+void UPlayerAnimInstance::PlayGuardMontage(bool _isGuarding)
 {
-	if (bIsGuarding)
+	if (_isGuarding)
 	{
 		if (!Montage_IsPlaying(_shieldMontage))
 		{

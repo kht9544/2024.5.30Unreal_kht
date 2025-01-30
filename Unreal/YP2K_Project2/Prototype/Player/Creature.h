@@ -27,7 +27,6 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	virtual void PostInitializeComponents() override;
-	virtual void Init();
 	virtual void Disable();
 	virtual void AttackHit();
 
@@ -70,13 +69,8 @@ public:
 	UUserWidget *GetWidget() const { return _Widget; }
 	int32 GetCurHp() { return _StatCom->GetCurHp(); }
 
-	FTimerHandle TimerHandle_Destroy;
-
-	UFUNCTION()
-	void DelayedDestroy();
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Dragon, meta = (AllowPrivateAccess = "true"))
-	bool bIsTransformed;
+	void PlaySoundEffect(FString SoundName, FVector Location);
+    void PlayEffect(FString EffectName, FVector Location);
 
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
@@ -98,7 +92,7 @@ protected:
 	class UWidgetComponent *_hpWidget;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Guard, meta = (AllowPrivateAccess = "true"))
-	bool bIsGuarding;
+	bool _isGuarding;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat, meta = (AllowPrivateAccess = "true"))
 	UStatComponent *_StatCom;

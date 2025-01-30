@@ -11,7 +11,6 @@
 #include "../Animation/BaseAnimInstance.h"
 #include "../Base/Managers/SoundManager.h"
 #include "../Player/MyPlayer.h"
-#include "../Player/Dragon.h"
 
 // Sets default values
 ACreature::ACreature()
@@ -19,10 +18,8 @@ ACreature::ACreature()
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	bIsGuarding = false;
+	_isGuarding = false;
 	_StatCom = CreateDefaultSubobject<UStatComponent>(TEXT("StatCom"));
-
-	bIsTransformed = false;
 }
 
 // Called when the game starts or when spawned
@@ -42,12 +39,16 @@ void ACreature::PostInitializeComponents()
 	Super::PostInitializeComponents();
 }
 
-void ACreature::Init()
-{
-}
-
 void ACreature::Disable()
 {
+	SoundManager->PlaySound(*GetDeadSoundName(), this->GetActorLocation());
+	SetActorHiddenInGame(true);
+	SetActorEnableCollision(false);
+
+	PrimaryActorTick.bCanEverTick = false;
+	auto controller = GetController();
+	if (controller)
+		GetController()->UnPossess();
 }
 
 void ACreature::AttackHit()
@@ -71,12 +72,8 @@ void ACreature::AttackHit()
 		FCollisionShape::MakeCapsule(attackRadius, attackRange * 0.5f),
 		params);
 
-	FColor drawColor = FColor::Green;
-
 	if (bResult)
 	{
-		drawColor = FColor::Red;
-
 		for (auto &hitResult : hitResults)
 		{
 			if (hitResult.GetActor() && hitResult.GetActor()->IsValidLowLevel())
@@ -230,7 +227,7 @@ float ACreature::TakeDamage(float Damage, struct FDamageEvent const &DamageEvent
 
 	const float GuardAngle = 90.0f;
 
-	if (bIsGuarding && Angle <= GuardAngle)
+	if (_isGuarding && Angle <= GuardAngle)
 	{
 		SoundManager->PlaySound(*GetGuardOn(), _hitPoint);
 	}
@@ -249,24 +246,24 @@ float ACreature::TakeDamage(float Damage, struct FDamageEvent const &DamageEvent
 		KnockbackDirection.Normalize();
 		LaunchCharacter(KnockbackDirection * 1000.f, true, true);
 		_StatCom->AddCurHp(-Damage);
-
-		if (_StatCom->IsDead())
-		{
-			SoundManager->PlaySound(*GetDeadSoundName(), this->GetActorLocation());
-
-			SetActorEnableCollision(false);
-			auto controller = GetController();
-			if (controller)
-				GetController()->UnPossess();
-
-			GetWorld()->GetTimerManager().SetTimer(TimerHandle_Destroy, this, &ACreature::DelayedDestroy, 2.0f, false);
-		}
 	}
 
 	return 0.0f;
 }
 
-void ACreature::DelayedDestroy()
+
+void ACreature::PlaySoundEffect(FString SoundName, FVector Location)
 {
-	Destroy();
+	if (SoundManager)
+	{
+		SoundManager->PlaySound(SoundName, Location);
+	}
+}
+
+void ACreature::PlayEffect(FString EffectName, FVector Location)
+{
+	if (EffectManager)
+	{
+		EffectManager->Play(EffectName, Location);
+	}
 }

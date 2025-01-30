@@ -9,8 +9,8 @@
 #include "Item/Consumes/ConsumeItem.h"
 #include "Item/Equip/EquipItem.h"
 #include "Base/MyGameInstance.h"
+#include "Animation/BaseAnimInstance.h"
 #include "Component/StatComponent.h"
-#include "../Player/Dragon.h"
 
 AMonster::AMonster()
 {
@@ -28,88 +28,26 @@ void AMonster::BeginPlay()
 void AMonster::PostInitializeComponents()
 {
     Super::PostInitializeComponents();
+    InitalizeAnim();
+}
 
-    Reward();
+void AMonster::InitalizeAnim()
+{
+    _monster_AnimInstance = Cast<UBaseAnimInstance>(GetMesh()->GetAnimInstance());
+    if (_monster_AnimInstance->IsValidLowLevelFast())
+    {
+        _monster_AnimInstance->OnMontageEnded.AddDynamic(this, &ACreature::OnAttackEnded);
+        _monster_AnimInstance->_attackDelegate.AddUObject(this, &ACreature::AttackHit);
+        _monster_AnimInstance->_deathDelegate.AddUObject(this, &AMonster::Disable);
+    }
 }
 
 void AMonster::Disable()
 {
     Super::Disable();
-}
-
-void AMonster::AttackHit()
-{
-    TArray<FHitResult> hitResults;
-    FCollisionQueryParams params(NAME_None, false, this);
-
-    float attackRange = 500.0f;
-    float attackRadius = 50.0f;
-
-    bool bResult = GetWorld()->SweepMultiByChannel(
-        hitResults,
-        GetActorLocation(),
-        GetActorLocation() + GetActorForwardVector() * attackRange,
-        FQuat::Identity,
-        ECollisionChannel::ECC_GameTraceChannel2,
-        FCollisionShape::MakeSphere(attackRadius),
-        params);
-
-    FVector vec = GetActorForwardVector() * attackRange;
-    FVector center = GetActorLocation() + vec * 0.5f;
-
-    FColor drawColor = FColor::Green;
-
-    if (bResult)
-    {
-        drawColor = FColor::Red;
-
-        for (auto &hitResult : hitResults)
-        {
-            AActor *hitActor = hitResult.GetActor();
-            if (hitActor && hitActor->IsValidLowLevel())
-            {
-                if (!hitActor->IsA<AMonster>())
-                {
-                    FDamageEvent DamageEvent;
-                    hitActor->TakeDamage(_StatCom->GetStr(), DamageEvent, GetController(), this);
-                    _hitPoint = hitResult.ImpactPoint;
-
-                    SoundManager->PlaySound(*GetHitSoundName(), _hitPoint);
-                    EffectManager->Play(*GetPlayerAttackHitEffect(), _hitPoint);
-                    break;
-                }
-            }
-        }
-    }
-    else
-    {
-        FVector missLocation = GetActorLocation();
-        SoundManager->PlaySound(*GetSwingSoundName(), missLocation);
-    }
-}
-
-void AMonster::DropReword()
-{
-}
-
-float AMonster::TakeDamage(float Damage, struct FDamageEvent const &DamageEvent, AController *EventInstigator, AActor *DamageCauser)
-{
-    APlayerController *PlayerController = GetWorld()->GetFirstPlayerController();
-    if (!PlayerController)
-        return 0.0f;
-
-    AMyPlayer *Player = Cast<AMyPlayer>(PlayerController->GetPawn());
-
-    float damaged = -_StatCom->AddCurHp(-Damage);
-
-    if (_StatCom->IsDead())
-    {
-        SetActorEnableCollision(false);
-        auto controller = GetController();
-        if (controller)
-            GetController()->UnPossess();
-        MonsterEvent.Broadcast();
-
+    Reward();
+     APlayerController *PlayerController = GetWorld()->GetFirstPlayerController();
+        AMyPlayer *Player = Cast<AMyPlayer>(PlayerController->GetPawn());
         if (Player)
         {
             Player->GetInventory()->AddMoney(FMath::FRand() * 100);
@@ -121,7 +59,24 @@ float AMonster::TakeDamage(float Damage, struct FDamageEvent const &DamageEvent,
                 Player->GetInventory()->AddItemToSlot(_newItem);
             }
         }
+}
+
+void AMonster::Attack_AI()
+{
+    if (_isAttacking)
+    {
+        return;
     }
+    _isAttacking = true;
+	RandomSectionIndex = FMath::RandRange(1, 3);
+    _monster_AnimInstance->PlayAttackMontage();
+    _monster_AnimInstance->JumpToSection(RandomSectionIndex);
+}
+
+float AMonster::TakeDamage(float Damage, struct FDamageEvent const &DamageEvent, AController *EventInstigator, AActor *DamageCauser)
+{
+    Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
+
     return 0.0f;
 }
 
