@@ -33,8 +33,6 @@ public:
 		}
 		
 	}
-
-	//
 	void pop()
 	{
 		_container[0] = _container.back();

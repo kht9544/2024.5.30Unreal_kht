@@ -92,7 +92,6 @@ void Dijkstra(int start)
 		Vertex hereV = pq.top();
 		pq.pop();
 
-		//���� �߰��Ѱ� �� ���� ��ο��� ��
 		if (best[hereV.vertexNum < hereV.g])
 		{
 			cout << hereV.vertexNum << '\n';
