@@ -2,18 +2,6 @@
 
 using namespace std;
 
-// 1. static cast
-// => 상식적인 변환만 허용
-// => 컴파일 시간에 캐스팅
-// 2. dynamic cast
-// => 상속구조에서 다형성(vftable)이 있어야 사용가능한 cast
-// => 이 때 캐스팅이 실패하면 nullptr을 반환
-// => 런타임에 캐스팅
-// 3. const cast
-// => 상수객체를 비상수객체로 캐스팅
-// 4. reinterpret_cast
-// => 모든 캐스팅 통과
-
 class Player
 {
 public:
