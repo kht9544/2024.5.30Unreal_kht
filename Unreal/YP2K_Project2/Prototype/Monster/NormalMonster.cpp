@@ -46,15 +46,12 @@ void ANormalMonster::BeginPlay()
 void ANormalMonster::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
-	_StatCom->SetMonsterLevelInit(1);
-}
-
-void ANormalMonster::InitalizeAnim()
-{
- 	  Super::InitalizeAnim();
-
 	 _monster_N_AnimInstance = Cast<UMonster_N_AnimInstance>(_monster_AnimInstance);
-
+	 if(_monster_N_AnimInstance)
+	 {
+		_StatCom->SetMonsterLevelInit(1);
+	 }
+	
 }
 
 void ANormalMonster::Attack_AI()

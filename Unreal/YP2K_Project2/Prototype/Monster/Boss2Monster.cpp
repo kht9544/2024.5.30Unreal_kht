@@ -48,15 +48,13 @@ void ABoss2Monster::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
 
+	_bossMonster02_AnimInstance = Cast<UMonster_Boss2_AnimInstance>(_monster_AnimInstance);
+	if(_bossMonster02_AnimInstance)
+	{
+		_bossMonster02_AnimInstance->_skillDelegate.AddDynamic(this, &ABoss2Monster::FireballAttack);
+	}
+
 	_StatCom->SetBossLevelInit(1);
-}
-
-void ABoss2Monster::InitalizeAnim()
-{
-	  Super::InitalizeAnim();
-
-	  _bossMonster02_AnimInstance = Cast<UMonster_Boss2_AnimInstance>(_monster_AnimInstance);
-	  _bossMonster02_AnimInstance->_skillDelegate.AddDynamic(this, &ABoss2Monster::FireballAttack);
 }
 
 void ABoss2Monster::FireballAttack(FVector Location)

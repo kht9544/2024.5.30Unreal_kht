@@ -45,13 +45,8 @@ void AEpicMonster_witch::BeginPlay()
 void AEpicMonster_witch::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
-	_StatCom->SetEpicLevelInit(1);
-}
-
-void AEpicMonster_witch::InitalizeAnim()
-{
-	Super::InitalizeAnim();
 	_monster_Epic_AnimInstance = Cast<UMonster_Epic01_Anim>(_monster_AnimInstance);
+	_StatCom->SetEpicLevelInit(1);
 }
 
 void AEpicMonster_witch::Tick(float DeltaTime)

@@ -51,14 +51,13 @@ void ABossMonster::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
 
-	_StatCom->SetBossLevelInit(1);
-}
-
-void ABossMonster::InitalizeAnim()
-{
-	Super::InitalizeAnim();
 	_bossMonster01_AnimInstance = Cast<UMonster_Boss01_AnimInstance>(_monster_AnimInstance);
-	_bossMonster01_AnimInstance->_stunDelegate.AddUObject(this, &ABossMonster::StunEnd);
+	if(_bossMonster01_AnimInstance)
+	{
+		_bossMonster01_AnimInstance->_stunDelegate.AddUObject(this, &ABossMonster::StunEnd);
+	}
+
+	_StatCom->SetBossLevelInit(1);
 }
 
 void ABossMonster::Attack_AI()
