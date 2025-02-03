@@ -85,8 +85,6 @@ UMyGameInstance::UMyGameInstance()
 	{
 		_ShopLists.Add(shopList4.Object);
 	}
-
-	SavedPlayerStats.SetNum(22);
 	SavedSkeletalMeshes.SetNum(6);
 }
 
@@ -94,35 +92,29 @@ void UMyGameInstance::SavePlayerStats(class UStatComponent *StatComponent)
 {
 	if (StatComponent)
 	{
-		SavedPlayerStats[0] = StatComponent->GetLevel();
-		SavedPlayerStats[1] = StatComponent->GetMaxHp();
-		SavedPlayerStats[2] = StatComponent->GetCurHp();
-		SavedPlayerStats[3] = StatComponent->GetOgHp();
-		SavedPlayerStats[4] = StatComponent->GetModHp();
-
-		SavedPlayerStats[5] = StatComponent->GetMaxMp();
-		SavedPlayerStats[6] = StatComponent->GetCurMp();
-		SavedPlayerStats[7] = StatComponent->GetOgMp();
-		SavedPlayerStats[8] = StatComponent->GetModMp();
-
-		SavedPlayerStats[9] = StatComponent->GetStr();
-		SavedPlayerStats[10] = StatComponent->GetOgStr();
-		SavedPlayerStats[11] = StatComponent->GetModStr();
-
-		SavedPlayerStats[12] = StatComponent->GetDex();
-		SavedPlayerStats[13] = StatComponent->GetOgDex();
-		SavedPlayerStats[14] = StatComponent->GetModDex();
-
-		SavedPlayerStats[15] = StatComponent->GetInt();
-		SavedPlayerStats[16] = StatComponent->GetOgInt();
-		SavedPlayerStats[17] = StatComponent->GetModInt();
-
-		SavedPlayerStats[18] = StatComponent->GetExp();
-		SavedPlayerStats[19] = StatComponent->GetNextExp();
-		SavedPlayerStats[20] = StatComponent->GetBonusPoint();
-
-		_savedAttackRadius = StatComponent->GetAttackRadius();
-		_savedAttackRange = StatComponent->GetAttackRadius();
+		SavedPlayerStats.Level = StatComponent->GetLevel();
+		SavedPlayerStats.MaxHp = StatComponent->GetMaxHp();
+		SavedPlayerStats.CurHp = StatComponent->GetCurHp();
+		SavedPlayerStats.OgHp = StatComponent->GetOgHp();
+		SavedPlayerStats.ModHp = StatComponent->GetModHp();
+		SavedPlayerStats.MaxMp = StatComponent->GetMaxMp();
+		SavedPlayerStats.CurMp = StatComponent->GetCurMp();
+		SavedPlayerStats.OgMp = StatComponent->GetOgMp();
+		SavedPlayerStats.ModMp = StatComponent->GetModMp();
+		SavedPlayerStats.Str = StatComponent->GetStr();
+		SavedPlayerStats.OgStr = StatComponent->GetOgStr();
+		SavedPlayerStats.ModStr = StatComponent->GetModStr();
+		SavedPlayerStats.Dex = StatComponent->GetDex();
+		SavedPlayerStats.OgDex = StatComponent->GetOgDex();
+		SavedPlayerStats.ModDex = StatComponent->GetModDex();
+		SavedPlayerStats.Int = StatComponent->GetInt();
+		SavedPlayerStats.OgInt = StatComponent->GetOgInt();
+		SavedPlayerStats.ModInt = StatComponent->GetModInt();
+		SavedPlayerStats.Exp = StatComponent->GetExp();
+		SavedPlayerStats.NextExp = StatComponent->GetNextExp();
+		SavedPlayerStats.BonusPoint = StatComponent->GetBonusPoint();
+		SavedPlayerStats.AttackRadius = StatComponent->GetAttackRadius();
+		SavedPlayerStats.AttackRange = StatComponent->GetAttackRadius();
 	}
 }
 
@@ -130,34 +122,29 @@ void UMyGameInstance::LoadPlayerStats(class UStatComponent *StatComponent)
 {
 	if (StatComponent)
 	{
-		StatComponent->SetLevel(SavedPlayerStats[0]);
-		StatComponent->SetMaxHp(SavedPlayerStats[1]);
-		StatComponent->SetHp(SavedPlayerStats[2]);
-		StatComponent->SetOgHp(SavedPlayerStats[3]);
-		StatComponent->SetModHp(SavedPlayerStats[4]);
-
-		StatComponent->SetMaxMp(SavedPlayerStats[5]);
-		StatComponent->SetMp(SavedPlayerStats[6]);
-		StatComponent->SetOgMp(SavedPlayerStats[7]);
-		StatComponent->SetModMp(SavedPlayerStats[8]);
-
-		StatComponent->SetStr(SavedPlayerStats[9]);
-		StatComponent->SetOgStr(SavedPlayerStats[10]);
-		StatComponent->SetModStr(SavedPlayerStats[11]);
-
-		StatComponent->SetDex(SavedPlayerStats[12]);
-		StatComponent->SetOgDex(SavedPlayerStats[13]);
-		StatComponent->SetModDex(SavedPlayerStats[14]);
-
-		StatComponent->SetInt(SavedPlayerStats[15]);
-		StatComponent->SetOgInt(SavedPlayerStats[16]);
-		StatComponent->SetModInt(SavedPlayerStats[17]);
-
-		StatComponent->SetExp(SavedPlayerStats[18]);
-		StatComponent->SetNextExp(SavedPlayerStats[19]);
-		StatComponent->SetBonusPoint(SavedPlayerStats[20]);
-		StatComponent->SetAttackRange(_savedAttackRange);
-		StatComponent->SetAttackRadius(_savedAttackRadius);
+		StatComponent->SetLevel(SavedPlayerStats.Level);
+		StatComponent->SetMaxHp(SavedPlayerStats.MaxHp);
+		StatComponent->SetHp(SavedPlayerStats.CurHp);
+		StatComponent->SetOgHp(SavedPlayerStats.OgHp);
+		StatComponent->SetModHp(SavedPlayerStats.ModHp);
+		StatComponent->SetMaxMp(SavedPlayerStats.MaxMp);
+		StatComponent->SetMp(SavedPlayerStats.CurMp);
+		StatComponent->SetOgMp(SavedPlayerStats.OgMp);
+		StatComponent->SetModMp(SavedPlayerStats.ModMp);
+		StatComponent->SetStr(SavedPlayerStats.Str);
+		StatComponent->SetOgStr(SavedPlayerStats.OgStr);
+		StatComponent->SetModStr(SavedPlayerStats.ModStr);
+		StatComponent->SetDex(SavedPlayerStats.Dex);
+		StatComponent->SetOgDex(SavedPlayerStats.OgDex);
+		StatComponent->SetModDex(SavedPlayerStats.ModDex);
+		StatComponent->SetInt(SavedPlayerStats.Int);
+		StatComponent->SetOgInt(SavedPlayerStats.OgInt);
+		StatComponent->SetModInt(SavedPlayerStats.ModInt);
+		StatComponent->SetExp(SavedPlayerStats.Exp);
+		StatComponent->SetNextExp(SavedPlayerStats.NextExp);
+		StatComponent->SetBonusPoint(SavedPlayerStats.BonusPoint);
+		StatComponent->SetAttackRange(SavedPlayerStats.AttackRange);
+		StatComponent->SetAttackRadius(SavedPlayerStats.AttackRadius);
 
 		StatComponent->UpdateUI();
 	}
@@ -212,7 +199,7 @@ void UMyGameInstance::SaveInventory(class UInventoryComponent *InventoryComponen
 				SavedEquipData.Add(Item.Key, ItemData);
 			}
 		}
-		SavedPlayerStats[21] = InventoryComponent->GetMoney();
+		SavedPlayerStats.Money = InventoryComponent->GetMoney();
 	}
 }
 
@@ -264,7 +251,7 @@ void UMyGameInstance::LoadInventory(class UInventoryComponent *InventoryComponen
 				}
 			}
 		}
-		InventoryComponent->AddMoney(SavedPlayerStats[21]);
+		InventoryComponent->AddMoney(SavedPlayerStats.Money);
 	}
 }
 

@@ -19,6 +19,18 @@
 #define SoundManager Cast<UMyGameInstance>(GetGameInstance())->GetSoundManager()
 #define EffectManager Cast<UMyGameInstance>(GetGameInstance())->GetEffectManager()
 
+USTRUCT()
+struct FPlayerStatsStruct {
+    GENERATED_BODY()
+    int32 Level, MaxHp, CurHp, OgHp, ModHp;
+    int32 MaxMp, CurMp, OgMp, ModMp;
+    int32 Str, OgStr, ModStr;
+    int32 Dex, OgDex, ModDex;
+    int32 Int, OgInt, ModInt;
+    int32 Exp, NextExp, BonusPoint, Money;
+    float AttackRadius, AttackRange;
+};
+
 UCLASS()
 class PROTOTYPE_API UMyGameInstance : public UGameInstance
 {
@@ -116,7 +128,7 @@ private:
 	UDataTable *_DragonStatTable;
 
 	UPROPERTY()
-	TArray<int32> SavedPlayerStats;
+    FPlayerStatsStruct SavedPlayerStats;
 
 	UPROPERTY()
 	TArray<class USkeletalMesh *> SavedSkeletalMeshes;
