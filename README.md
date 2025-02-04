@@ -1,5 +1,13 @@
-C++폴더 --- C++기본 실습코드<br/>
-Algorithm폴더 --- 자료구조및 알고리즘, Winapi에 관련된 코드 정리<br/>
-Unreal폴더 --- UE_Kht(기본 언리얼 실습 코드), SimpleShooter(FPS), Team_YPK_UnrealProject(Team Project RPG), Team_YP2K_Prototype(Team Project2 Prototype)<br/>
-DB --- SQL<br/>
-Server --- client server 코드 
+C++폴더 <br/>
+C++기본 관련 코드<br/><br/>
+Algorithm폴더 <br/>
+자료구조및 알고리즘, Winapi에 관련된 코드<br/><br/>
+Unreal폴더 <br/>
+UE_Kht : 기본 언리얼 실습 코드 정리<br/>
+SimpleShooter : 언리얼 기본 FPS게임 구현 코드 <br/>
+Team_YPK_UnrealProject : 1차 RPG 팀프로젝트 코드<br/>
+Team_YP2K_Prototype : 2차 메인 RPG 팀프로젝트 코드 <br/>
+패키징파일: https://drive.google.com/drive/folders/1R1YOr0E5lGBl__Li2Lf_HMDNkwYBS-YR?usp=sharing
+<br/><br/>
+DB --- SQL관련 코드 <br/><br/>
+Server --- client server관련 코드
