@@ -6,6 +6,8 @@ Unreal폴더 <br/>
 UE_Kht : 기본 언리얼 실습 코드 정리<br/>
 SimpleShooter : 언리얼 기본 FPS게임 구현 코드 <br/>
 Team_YPK_UnrealProject : 1차 RPG 팀프로젝트 코드<br/>
-Team_YP2K_Prototype : 2차 메인 RPG 팀프로젝트 코드 <br/><br/>
+Team_YP2K_Prototype : 2차 메인 RPG 팀프로젝트 코드 <br/>
+패키징파일: https://drive.google.com/drive/folders/1R1YOr0E5lGBl__Li2Lf_HMDNkwYBS-YR?usp=sharing
+<br/><br/>
 DB --- SQL관련 코드 <br/><br/>
 Server --- client server관련 코드
