@@ -31,7 +31,6 @@ AFireball::AFireball()
     _moveCom->bRotationFollowsVelocity = true;
     _moveCom->ProjectileGravityScale = 0.0f;
 
-    InitialLifeSpan = 5.0f;
     OrbitRadius = 100.0f;
     OrbitSpeed = 2.0f;
     _damage = 50.f;
@@ -45,6 +44,8 @@ void AFireball::BeginPlay()
 
     Player = Cast<AMyPlayer>(UGameplayStatics::GetPlayerPawn(GetWorld(), 0));
     StartLocation = GetActorLocation();
+    
+
 }
 
 void AFireball::InitializeOrbit(float InRadius, float InAngle, int InTotalFireballCount)
@@ -139,7 +140,8 @@ void AFireball::OnMyCharacterOverlap(UPrimitiveComponent *OverlappedComponent, A
         monster->TakeDamage(_damage, FDamageEvent(), nullptr, this);
         EffectManager->Play(*GetSkill_03_HitEffect(), monster->GetActorLocation());
         SoundManager->PlaySound(*GetSkill_03_HitSound(), monster->GetActorLocation());
-        Destroy();
+        SetActorHiddenInGame(true);
+        SetActorEnableCollision(false);
     }
 }
 
@@ -151,4 +153,11 @@ FString AFireball::GetSkill_03_HitEffect() const
 FString AFireball::GetSkill_03_HitSound() const
 {
     return "Skill03_Sound_Hit_Cue";
+}
+
+void AFireball::HideFireball()
+{ 
+    UE_LOG(LogTemp, Warning, TEXT("Fireball Hide"));
+    SetActorHiddenInGame(true);
+    SetActorEnableCollision(false);
 }

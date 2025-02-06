@@ -113,7 +113,8 @@ void AMeteorDecal::OnMeteorImpact()
         GetInstigatorController(),
         true);
 
-    DeActiveEvent(GetActorLocation());
+    SetActorHiddenInGame(true);
+    SetActorEnableCollision(false);
 }
 
 void AMeteorDecal::UpdateMeteorPosition(float DeltaTime)

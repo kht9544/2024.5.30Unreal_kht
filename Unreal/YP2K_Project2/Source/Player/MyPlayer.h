@@ -17,12 +17,6 @@ struct FInputActionValue;
 class ABaseItem;
 class ADragon;
 
-UENUM(BlueprintType)
-enum class EPlayerState : uint8
-{
-	Normal UMETA(DisplayName = "Normal"),
-	Climbing UMETA(DisplayName = "Climbing")
-};
 
 UCLASS()
 class PROTOTYPE_API AMyPlayer : public ACreature
@@ -95,6 +89,8 @@ private:
 	void InvenUIOpen(const FInputActionValue &value);
 	void Interect(const FInputActionValue &value);
 	void OptionsOpen(const FInputActionValue &value);
+
+	void InitializeDecalPool();
 
 	void UpdateDecalLocation();
 
@@ -209,7 +205,15 @@ private:
 	class USkeletalMeshComponent *_shieldBodyMesh;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Decal, meta = (AllowPrivateAccess = "true"))
-	TSubclassOf<class AMyDecal> _decal;
+	TSubclassOf<class AMeteorDecal> _decal;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Decal, meta = (AllowPrivateAccess = "true"))
+	TArray<AMeteorDecal*> MeteorDecalPool;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Decal, meta = (AllowPrivateAccess = "true"))
+    int32 MeteorPoolSize = 20;
+
+	AMeteorDecal* GetPooledMeteorDecal();
 
 	UPROPERTY(EditAnywhere, Category = "Dash")
 	float _dashDistance;
@@ -237,6 +241,14 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Skills")
 	TSubclassOf<class AFireball> _fireball;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Skill", meta = (AllowPrivateAccess = "true"))
+	TArray<AFireball*> FireballPool;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Skill", meta = (AllowPrivateAccess = "true"))
+    int32 FireballPoolSize = 20;
+
+	class AFireball* GetPooledFireball();
 
     float DefaultGroundFriction;
     float DefaultBrakingDecelerationWalking;

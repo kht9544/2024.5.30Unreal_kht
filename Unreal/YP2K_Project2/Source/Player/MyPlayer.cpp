@@ -141,6 +141,8 @@ void AMyPlayer::BeginPlay()
 	UIManager->SetPlayerUI(_StatCom);
 
 	SkillOnCooldown.Init(false, 4);
+
+	InitializeDecalPool();
 }
 
 void AMyPlayer::PostInitializeComponents()
@@ -547,6 +549,25 @@ void AMyPlayer::ConfirmTeleportLocation()
 	}
 }
 
+AMeteorDecal* AMyPlayer::GetPooledMeteorDecal()
+{
+	for (AMeteorDecal* Meteor : MeteorDecalPool)
+    {
+        if (Meteor && Meteor->IsHidden())
+        {
+            return Meteor;
+        }
+    }
+
+    AMeteorDecal* NewMeteor = GetWorld()->SpawnActor<AMeteorDecal>(AMeteorDecal::StaticClass(), FVector::ZeroVector, FRotator::ZeroRotator);
+    if (NewMeteor)
+    {
+        MeteorDecalPool.Add(NewMeteor);
+    }
+    return NewMeteor;
+}
+
+
 void AMyPlayer::Skill2(const FInputActionValue &value)
 {
 	bool isPressed = value.Get<bool>();
@@ -620,14 +641,10 @@ void AMyPlayer::UpdateDecalLocation()
 void AMyPlayer::ConfirmSkillLocation()
 {
 	if (SkillOnCooldown[1])
-		return;
+        return;
 
-	_StatCom->AddCurMp(-10);
-	SkillOnCooldown[1] = true;
-
-	FActorSpawnParameters SpawnParams;
-	SpawnParams.Owner = this;
-	SpawnParams.Instigator = GetInstigator();
+    _StatCom->AddCurMp(-10);
+    SkillOnCooldown[1] = true;
 
 	AMyPlayerController *PlayerController = Cast<AMyPlayerController>(GetController());
 	if (PlayerController)
@@ -635,37 +652,40 @@ void AMyPlayer::ConfirmSkillLocation()
 		PlayerController->bShowMouseCursor = false;
 		PlayerController->SetInputMode(FInputModeGameOnly());
 	}
+    FVector MeteorStartLocation = GetActorLocation() + FVector(0, 0, 5000.0f);
+    FVector DecalLocation = TargetSkillLocation;
+    FRotator DecalRotation = SkillRotation;
+    DecalRotation.Pitch -= 90.0f;
 
-	FVector MeteorStartLocation = GetActorLocation() + FVector(0, 0, 5000.0f);
-	FVector DecalLocation = TargetSkillLocation;
-	FRotator DecalRotation = SkillRotation;
-	DecalRotation.Pitch -= 90.0f;
+    int MeteorCount = (_StatCom->GetInt()) / 10;
 
-	int MeteorCount = (_StatCom->GetInt()) / 10;
+    AMeteorDecal* CenterMeteorDecal = GetPooledMeteorDecal();
+    if (CenterMeteorDecal)
+    {
+         CenterMeteorDecal->SetActorHiddenInGame(false);
+         CenterMeteorDecal->SetActorEnableCollision(true);
+         CenterMeteorDecal->StartMeteor(MeteorStartLocation, DecalLocation, 3.0f);
+    }
 
-	AMeteorDecal *CenterMeteorDecal = GetWorld()->SpawnActor<AMeteorDecal>(_decal, DecalLocation, DecalRotation, SpawnParams);
-	if (CenterMeteorDecal)
-	{
-		CenterMeteorDecal->StartMeteor(MeteorStartLocation, DecalLocation, 3.0f);
-	}
+    for (int i = 0; i < MeteorCount - 1; i++)
+    {
+        float Angle = (i * (360.0f / (MeteorCount - 1))) * (PI / 180.0f);
+        float Radius = 900.0f;
 
-	for (int i = 0; i < MeteorCount - 1; i++)
-	{
-		float Angle = (i * (360.0f / (MeteorCount - 1))) * (PI / 180.0f);
-		float Radius = 900.0f;
+        FVector SpawnLocation = DecalLocation;
+        SpawnLocation.X += FMath::Cos(Angle) * Radius;
+        SpawnLocation.Y += FMath::Sin(Angle) * Radius;
 
-		FVector SpawnLocation = DecalLocation;
-		SpawnLocation.X += FMath::Cos(Angle) * Radius;
-		SpawnLocation.Y += FMath::Sin(Angle) * Radius;
+        AMeteorDecal* MeteorDecal = GetPooledMeteorDecal();
+        if (MeteorDecal)
+        {
+            MeteorDecal->SetActorHiddenInGame(false);
+            MeteorDecal->SetActorEnableCollision(true);
+            MeteorDecal->StartMeteor(MeteorStartLocation, SpawnLocation, 3.0f);
+        }
+    }
 
-		AMeteorDecal *MeteorDecal = GetWorld()->SpawnActor<AMeteorDecal>(_decal, SpawnLocation, FRotator::ZeroRotator, SpawnParams);
-		if (MeteorDecal)
-		{
-			MeteorDecal->StartMeteor(MeteorStartLocation, SpawnLocation, 3.0f);
-		}
-	}
-
-	UIManager->GetSkillUI()->StartCooldown(1, 5.0f);
+    UIManager->GetSkillUI()->StartCooldown(1, 5.0f);
 
 	UPlayerAnimInstance *PlayerAnimInstance = Cast<UPlayerAnimInstance>(GetMesh()->GetAnimInstance());
 	if (PlayerAnimInstance)
@@ -674,6 +694,25 @@ void AMyPlayer::ConfirmSkillLocation()
 	}
 
 	SoundManager->PlaySound(*GetSoundName(ESoundType::SkillSound02), _hitPoint);
+}
+
+AFireball* AMyPlayer::GetPooledFireball()
+{
+	for (AFireball* Fire : FireballPool)
+    {
+        if (Fire && Fire->IsHidden())
+        {
+            return Fire;
+        }
+    }
+
+    AFireball* Fireball = GetWorld()->SpawnActor<AFireball>(_fireball, FVector::ZeroVector, FRotator::ZeroRotator);
+    if (Fireball)
+    {
+        FireballPool.Add(Fireball);
+    }
+
+    return Fireball;
 }
 
 void AMyPlayer::Skill3(const FInputActionValue &value)
@@ -711,12 +750,19 @@ void AMyPlayer::Skill3(const FInputActionValue &value)
 					FVector spawnLocation = GetActorLocation() + GetActorForwardVector() * 50.0f;
 					spawnLocation.X += FMath::Cos(Angle) * Radius;
 					spawnLocation.Y += FMath::Sin(Angle) * Radius;
-					AFireball *Fireball = GetWorld()->SpawnActor<AFireball>(_fireball, spawnLocation, spawnRotation);
+					AFireball *Fireball = GetPooledFireball();
 
 					if (Fireball)
 					{
+						Fireball->SetActorHiddenInGame(false);
+            			Fireball->SetActorEnableCollision(true);
 						Fireball->InitializeOrbit(Radius, Angle, FireballCount);
+
+						FTimerHandle HideTimerHandle; 
+						GetWorld()->GetTimerManager().SetTimer(HideTimerHandle, Fireball, &AFireball::HideFireball, 5.0f, false);
 					}
+					
+
 				}
 			}
 		}
@@ -884,6 +930,33 @@ void AMyPlayer::OptionsOpen(const FInputActionValue &value)
 	}
 }
 
+void AMyPlayer::InitializeDecalPool()
+{
+	for (int32 i = 0; i < MeteorPoolSize; ++i)
+    {
+        AMeteorDecal* Meteor = GetWorld()->SpawnActor<AMeteorDecal>(_decal, FVector::ZeroVector, FRotator::ZeroRotator);
+        if (Meteor)
+        {
+            Meteor->SetActorHiddenInGame(true);
+            Meteor->SetActorEnableCollision(false);
+            MeteorDecalPool.Add(Meteor);
+        }
+    }
+
+	for (int32 i = 0; i < FireballPoolSize; ++i)
+    {
+        AFireball* Fireball = GetWorld()->SpawnActor<AFireball>(_fireball, FVector::ZeroVector, FRotator::ZeroRotator);
+        if (Fireball)
+        {
+            Fireball->SetActorHiddenInGame(true);
+            Fireball->SetActorEnableCollision(false);
+            FireballPool.Add(Fireball);
+        }
+    }
+}
+
+
+
 void AMyPlayer::StartScreenShake()
 {
 	static float InitialShakeStrength = 0.1f;
@@ -912,4 +985,6 @@ void AMyPlayer::StartScreenShake()
 		ElapsedTime = 0.0f;
 	}
 }
+
+
 
