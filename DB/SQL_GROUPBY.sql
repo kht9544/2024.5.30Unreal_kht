@@ -9,8 +9,6 @@
 -- SELECT
 -- ORDER BY
 
--- players테이블에서 출신이 명확한 야구선수들의 고향에 따라서 몇명이 있는지 출력
-
 -- SubQuery
 
 SELECT *

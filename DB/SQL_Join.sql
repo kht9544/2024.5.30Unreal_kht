@@ -73,7 +73,6 @@ CROSS JOIN
 
 -- INNER JOIN : 가로로 합친다.
 -- 두개의 테이블을 가로로 결합하고, 결합 기준은 ON (외래키)
--- playerID가 양쪽에 NULL이 아닌 얘들만 골라서 결합시킨다.
 SELECT lahmanID, playerID, nameFirst, nameLast
 FROM players
 
