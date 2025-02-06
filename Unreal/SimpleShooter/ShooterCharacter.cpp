@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 
 #include "ShooterCharacter.h"
 #include "Gun.h"
@@ -46,7 +44,6 @@ void AShooterCharacter::Tick(float DeltaTime)
 
 }
 
-// Called to bind functionality to input
 void AShooterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);

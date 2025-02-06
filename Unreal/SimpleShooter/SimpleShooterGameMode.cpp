@@ -1,5 +1,3 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
-
 #include "SimpleShooterGameMode.h"
 #include "SimpleShooterCharacter.h"
 #include "UObject/ConstructorHelpers.h"

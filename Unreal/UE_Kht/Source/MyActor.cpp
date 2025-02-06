@@ -35,7 +35,6 @@ void AMyActor::BeginPlay()
 void AMyActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	//UE_LOG(LogTemp, Log, TEXT("Tick : %f"), DeltaTime);
 
 	if (GetAttachParentActor() != nullptr)
 	{
@@ -54,8 +53,5 @@ void AMyActor::Tick(float DeltaTime)
 		FVector destPos = GetActorLocation() + moveV;
 		SetActorLocation(destPos);
 	}
-
-	// 3. Quaternion (사원수)
-	// 사원수 회전에 대해서 조사해보기
 }
 
