@@ -13,6 +13,4 @@ class PROTOTYPE_API AConsumeItem : public ABaseItem
 
 public:
 	AConsumeItem();
-
-	virtual void UseItem() override;
 };

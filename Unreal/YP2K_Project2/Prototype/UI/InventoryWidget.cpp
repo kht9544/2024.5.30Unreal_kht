@@ -388,7 +388,7 @@ void UInventoryWidget::UpdateModStat(int32 statType, int32 amount)
 		moded = _VogStat[statType] + amount;
 
 	_modStat[statType]->SetText(FText::FromString(FString::FromInt(moded)));
-
+ 
 	if (moded > nowStat)
 		_modStat[statType]->SetColorAndOpacity(FSlateColor(FColor(0, 200, 0)));
 	if (moded == nowStat)

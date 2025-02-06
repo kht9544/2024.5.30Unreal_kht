@@ -143,7 +143,7 @@ void AEquipItem::UnEquip()
         break;
     }
 
-    _player->GetStatComponent()->ModStat(_ModStatType, 0);
+    _player->GetStatComponent()->DropItem(this);
     _isEquipped = false;
 }
 
@@ -155,7 +155,7 @@ void AEquipItem::UseItem()
     EquipPlayer();
     _player->ItemEquipped.Broadcast(this);
 
-    _player->GetStatComponent()->ModStat(_ModStatType, _Value);
+    _player->GetStatComponent()->UseItem(this);
 }
 
 void AEquipItem::DropItem(FVector location, FRotator rotation)

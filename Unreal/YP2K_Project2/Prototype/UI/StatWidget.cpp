@@ -184,7 +184,7 @@ void UStatWidget::HPDownClick()
 	if (player && player->GetStatComponent())
 	{
 		int32 StatHp = player->GetStatComponent()->GetMaxHp();
-		int32 baseHp = player->GetStatComponent()->GetBaseStat(StatType::HP);
+		int32 baseHp = player->GetStatComponent()->GetCurHp();
 		int32 bonusPoints = player->GetStatComponent()->GetBonusPoint();
 
 		if (StatHp > baseHp)
@@ -222,7 +222,7 @@ void UStatWidget::MPDownClick()
 	if (player && player->GetStatComponent())
 	{
 		int32 StatMp = player->GetStatComponent()->GetMaxMp();
-		int32 baseHp = player->GetStatComponent()->GetBaseStat(StatType::MP);
+		int32 baseHp = player->GetStatComponent()->GetCurMp();
 		int32 bonusPoints = player->GetStatComponent()->GetBonusPoint();
 
 		if (StatMp > baseHp)
@@ -259,14 +259,11 @@ void UStatWidget::STRDownClick()
 	if (player && player->GetStatComponent())
 	{
 		int32 StatStr = player->GetStatComponent()->GetStr();
-		int32 baseHp = player->GetStatComponent()->GetBaseStat(StatType::STR);
 		int32 bonusPoints = player->GetStatComponent()->GetBonusPoint();
 
-		if (StatStr > baseHp)
-		{
-			player->GetStatComponent()->SetStr(StatStr - 1);
-			player->GetStatComponent()->SetBonusPoint(bonusPoints + 1);
-		}
+		player->GetStatComponent()->SetStr(StatStr - 1);
+		player->GetStatComponent()->SetBonusPoint(bonusPoints + 1);
+		
 		UpdateStatDisplay();
 	}
 }
@@ -296,14 +293,11 @@ void UStatWidget::DEXDownClick()
 	if (player && player->GetStatComponent())
 	{
 		int32 StatDex = player->GetStatComponent()->GetDex();
-		int32 baseHp = player->GetStatComponent()->GetBaseStat(StatType::DEX);
 		int32 bonusPoints = player->GetStatComponent()->GetBonusPoint();
 
-		if (StatDex > baseHp)
-		{
-			player->GetStatComponent()->SetDex(StatDex - 1);
-			player->GetStatComponent()->SetBonusPoint(bonusPoints + 1);
-		}
+		player->GetStatComponent()->SetDex(StatDex - 1);
+		player->GetStatComponent()->SetBonusPoint(bonusPoints + 1);
+
 		UpdateStatDisplay();
 	}
 }
@@ -333,14 +327,11 @@ void UStatWidget::INTDownClick()
 	if (player && player->GetStatComponent())
 	{
 		int32 StatInt = player->GetStatComponent()->GetInt();
-		int32 baseHp = player->GetStatComponent()->GetBaseStat(StatType::INT);
 		int32 bonusPoints = player->GetStatComponent()->GetBonusPoint();
 
-		if (StatInt > baseHp)
-		{
-			player->GetStatComponent()->SetInt(StatInt - 1);
-			player->GetStatComponent()->SetBonusPoint(bonusPoints + 1);
-		}
+		player->GetStatComponent()->SetInt(StatInt - 1);
+		player->GetStatComponent()->SetBonusPoint(bonusPoints + 1);
+		
 		UpdateStatDisplay();
 	}
 }

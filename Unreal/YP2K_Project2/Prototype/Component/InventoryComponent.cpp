@@ -370,6 +370,7 @@ void UInventoryComponent::UpdateUI()
 			UIupdate_equip(SlotName, nullptr);
 		}
 	}
+	SetMoney(_money);
 }
 
 void UInventoryComponent::SetMoney(int32 amount)

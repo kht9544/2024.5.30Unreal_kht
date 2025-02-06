@@ -7,7 +7,7 @@
 #include "Player/MyPlayer.h"
 #include "Player/MyPlayerController.h"
 #include "TimerManager.h"
-
+#include "Item/BaseItem.h"
 #include "Particles/ParticleSystemComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "../Base/Managers/SoundManager.h"
@@ -64,15 +64,6 @@ void UStatComponent::SetLevelInit(int level)
 		SetMp(_maxMp);
 		_bonusPoint = Data->BonusPoint;
 		_PILevelDelegate.Broadcast(_level);
-
-		if (_level == 1)
-		{
-			_ogHp = _maxHp;
-			_ogMp = _maxMp;
-			_ogStr = _str;
-			_ogDex = _dex;
-			_ogInt = _int;
-		}
 		UpdateUI();
 	}
 }
@@ -86,16 +77,10 @@ void UStatComponent::SetMonsterLevelInit(int level)
 		Data = GAMEINSTANCE->GetMonsterDataByLevel(level);
 		_level = level;
 		_maxHp = Data->MaxHP;
-		_ogHp = _maxHp;
 		_maxMp = Data->MaxMP;
-		_ogMp = _maxMp;
 		_str = Data->STR;
-		_ogStr = _str;
 		_dex = Data->DEX;
-		_ogDex = _dex;
 		_int = Data->INT;
-		_ogInt = _int;
-
 		_nextExp = Data->EXP;
 		_curExp = 0;
 
@@ -118,15 +103,10 @@ void UStatComponent::SetEpicLevelInit(int level)
 		Data = GAMEINSTANCE->GetEpicDataByLevel(level);
 		_level = level;
 		_maxHp = Data->MaxHP;
-		_ogHp = _maxHp;
 		_maxMp = Data->MaxMP;
-		_ogMp = _maxMp;
 		_str = Data->STR;
-		_ogStr = _str;
 		_dex = Data->DEX;
-		_ogDex = _dex;
 		_int = Data->INT;
-		_ogInt = _int;
 
 		_nextExp = Data->EXP;
 		_curExp = 0;
@@ -150,16 +130,11 @@ void UStatComponent::SetBossLevelInit(int level)
 		Data = GAMEINSTANCE->GetBossDataByLevel(level);
 		_level = level;
 		_maxHp = Data->MaxHP;
-		_ogHp = _maxHp;
 		_curHp = _maxHp;
 		_maxMp = Data->MaxMP;
-		_ogMp = _maxMp;
 		_str = Data->STR;
-		_ogStr = _str;
 		_dex = Data->DEX;
-		_ogDex = _dex;
 		_int = Data->INT;
-		_ogInt = _int;
 
 		_nextExp = Data->EXP;
 
@@ -177,64 +152,8 @@ void UStatComponent::UpdateUI()
 {
 	if (Cast<AMyPlayer>(GetOwner()))
 	{
-		TArray<int32> statPack4UI = {_ogHp, _ogMp, _ogStr, _ogDex, _ogInt};
+		TArray<int32> statPack4UI = { _curHp, _curMp, _str, _dex, _int};
 		UIManager->GetInventoryUI()->InitStat(statPack4UI);
-	}
-}
-
-int32 UStatComponent::GetBaseStat(StatType statType) const
-{
-	switch (statType)
-	{
-	case StatType::HP:
-		return _ogHp;
-	case StatType::MP:
-		return _ogMp;
-	case StatType::STR:
-		return _ogStr;
-	case StatType::DEX:
-		return _ogDex;
-	case StatType::INT:
-		return _ogInt;
-	default:
-		return 0;
-	}
-}
-
-void UStatComponent::DecreaseStat(StatType stat, int32 amount)
-{
-	switch (stat)
-	{
-	case StatType::HP:
-		if (_maxHp - amount >= _ogHp)
-		{
-			_maxHp -= amount;
-			if (_curHp > _maxHp)
-				_curHp = _maxHp;
-		}
-		break;
-	case StatType::MP:
-		if (_maxMp - amount >= _ogMp)
-		{
-			_maxMp -= amount;
-			if (_curMp > _maxMp)
-				_curMp = _maxMp;
-		}
-		break;
-	case StatType::STR:
-		if (_str - amount >= _ogStr)
-			_str -= amount;
-		break;
-	case StatType::DEX:
-		if (_dex - amount >= _ogDex)
-			_dex -= amount;
-		break;
-	case StatType::INT:
-		if (_int - amount >= _ogInt)
-			_int -= amount;
-		break;
-	default:
-		break;
 	}
 }
 
@@ -272,17 +191,6 @@ void UStatComponent::SetMaxHp(int32 newMaxHp)
 	UIManager->GetInventoryUI()->UpdateStat();
 }
 
-void UStatComponent::SetModHp(int32 newModHp)
-{
-	_modHp = FMath::Clamp(newModHp, 0 , 1000);
-}
-
-
-void UStatComponent::SetOgHp(int32 newMaxHp)
-{
-	_ogHp = FMath::Clamp(newMaxHp, 0, 1000);
-}
-
 void UStatComponent::SetMaxMp(int32 newMaxMp)
 {
 	auto myGameInstance = Cast<UMyGameInstance>(GetWorld()->GetGameInstance());
@@ -297,15 +205,6 @@ void UStatComponent::SetMaxMp(int32 newMaxMp)
 	UIManager->GetInventoryUI()->UpdateStat();
 }
 
-void UStatComponent::SetModMp(int32 newModMp)
-{
-	_modMp = FMath::Clamp(newModMp,0,1000);
-}
-
-void UStatComponent::SetOgMp(int32 newMaxMp)
-{
-	_ogMp = FMath::Clamp(newMaxMp, 0, 1000);
-}
 
 void UStatComponent::SetBonusPoint(int32 newBp)
 {
@@ -319,7 +218,6 @@ void UStatComponent::SetBonusPoint(int32 newBp)
 
 void UStatComponent::SetStr(int32 newstr)
 {
-
 	auto myGameInstance = Cast<UMyGameInstance>(GetWorld()->GetGameInstance());
 	FMyStatData *Data = nullptr;
 
@@ -330,15 +228,6 @@ void UStatComponent::SetStr(int32 newstr)
 	UIManager->GetInventoryUI()->UpdateStat();
 }
 
-void UStatComponent::SetOgStr(int32 newstr)
-{
-	_ogStr = FMath::Clamp(newstr, 0, 100);
-}
-
-void UStatComponent::SetModStr(int32 newstr)
-{
-	_modStr = FMath::Clamp(newstr, 0, 100);
-}
 
 void UStatComponent::SetDex(int32 newdex)
 {
@@ -352,16 +241,6 @@ void UStatComponent::SetDex(int32 newdex)
 	UIManager->GetInventoryUI()->UpdateStat();
 }
 
-void UStatComponent::SetOgDex(int32 newdex)
-{
-	_ogDex = FMath::Clamp(newdex, 0, 100);
-}
-
-void UStatComponent::SetModDex(int32 newdex)
-{
-	_modDex = FMath::Clamp(newdex, 0, 100);
-}
-
 void UStatComponent::SetInt(int32 newint)
 {
 	auto myGameInstance = Cast<UMyGameInstance>(GetWorld()->GetGameInstance());
@@ -372,16 +251,6 @@ void UStatComponent::SetInt(int32 newint)
 
 	UIManager->GetInventoryUI()->UpdateOriginStat((int32)StatType::INT, _int);
 	UIManager->GetInventoryUI()->UpdateStat();
-}
-
-void UStatComponent::SetOgInt(int32 newint)
-{
-	_ogInt = FMath::Clamp(newint, 0, 100);
-}
-
-void UStatComponent::SetModInt(int32 newint)
-{
-	_modInt = FMath::Clamp(newint, 0, 100);
 }
 
 void UStatComponent::SetExp(int32 newexp)
@@ -397,28 +266,6 @@ void UStatComponent::SetNextExp(int32 newnextexp)
 	_nextExp = newnextexp;
 }
 
-void UStatComponent::AddStat(StatType type, int32 amount)
-{
-	switch (type)
-	{
-	case StatType::HP:
-		break;
-	case StatType::MP:
-		break;
-	case StatType::STR:
-		break;
-	case StatType::DEX:
-		break;
-	case StatType::INT:
-		break;
-	case StatType::CurHP:
-		break;
-	case StatType::CurMP:
-		break;
-	default:
-		break;
-	}
-}
 
 void UStatComponent::SetStatBoost(int32 rate)
 {
@@ -477,24 +324,40 @@ void UStatComponent::SetMp(int32 mp)
 	_PlMPDelegate.Broadcast(ratio);
 }
 
-int UStatComponent::AddCurHp(int32 amount)
+void UStatComponent::AddMaxHp(int32 amount)
 {
-	int beforeHp = _curHp;
-
-	int afterHp = beforeHp + amount;
-	SetHp(afterHp);
-
-	return afterHp - beforeHp;
+	SetMaxHp(_maxHp + amount);
 }
 
-int UStatComponent::AddCurMp(int32 amount)
+void UStatComponent::AddMaxMp(int32 amount)
 {
-	int beforeMp = _curMp;
+	SetMaxMp(_maxMp + amount);
+}
 
-	int afterMp = beforeMp + amount;
-	SetMp(afterMp);
 
-	return afterMp - beforeMp;
+void UStatComponent::AddCurHp(int32 amount)
+{
+	SetHp(_curHp + amount);
+}
+
+void UStatComponent::AddCurMp(int32 amount)
+{
+	SetMp(_curMp + amount);
+}
+
+void UStatComponent::AddStr(int32 amount)
+{
+	SetStr(_str + amount);
+}
+
+void UStatComponent::AddDex(int32 amount)
+{
+	SetDex(_dex + amount);
+}
+
+void UStatComponent::AddInt(int32 amount)
+{
+	SetInt(_int + amount);
 }
 
 void UStatComponent::AddAttackDamage(float amount)
@@ -526,53 +389,76 @@ void UStatComponent::AddExp(int32 amount)
 			GameInstance->GetSoundManager()->PlaySound(*GetLevelUpSound(), GetOwner()->GetActorLocation());
 		}
 	}
-	float ratio = EXpRatio();
+	float ratio = ExpRatio();
 	_PlEXPDelegate.Broadcast(ratio);
 }
 
-void UStatComponent::ModStat(StatType stat, int32 amount)
+void UStatComponent::UseItem(class ABaseItem *item)
 {
-	auto invenUI = GAMEINSTANCE->GetUIManager()->GetInventoryUI();
-
-	switch (stat)
+	if(item == nullptr)
+		return;
+	
+	switch (item->GetModStat())
 	{
 	case StatType::HP:
-		_modHp = amount;
-		SetHp(_curHp + amount);
-		SetMaxHp(_ogHp+_modHp);
-		invenUI->UpdateOriginStat((int32)(StatType::HP), _maxHp);
+		AddMaxHp(item->GetValue());
 		break;
 	case StatType::MP:
-		_modMp = amount;
-		SetMp(_curMp + amount);
-		SetMaxMp(_ogMp + _modMp);
-		invenUI->UpdateOriginStat((int32)(StatType::MP), _maxMp);
-		break;
-	case StatType::STR:
-		_modStr = amount;
-		SetStr(_ogStr + _modStr);
-		invenUI->UpdateOriginStat((int32)(StatType::STR), _str);
-		break;
-	case StatType::DEX:
-		_modDex = amount;
-		SetDex(_ogDex + _modDex);
-		invenUI->UpdateOriginStat((int32)(StatType::DEX), _dex);
-		break;
-	case StatType::INT:
-		_modInt = amount;
-		SetInt(_ogInt + _modInt);
-		invenUI->UpdateOriginStat((int32)(StatType::INT), _int);
+		AddMaxMp(item->GetValue());
 		break;
 	case StatType::CurHP:
-		AddCurHp(amount);
+		AddCurHp(item->GetValue());
 		break;
 	case StatType::CurMP:
-		AddCurMp(amount);
+		AddCurMp(item->GetValue());
+		break;
+	case StatType::STR:
+		AddStr(item->GetValue());
+		break;
+	case StatType::DEX:
+		AddDex(item->GetValue());
+		break;
+	case StatType::INT:
+		AddInt(item->GetValue());
 		break;
 	default:
 		break;
 	}
 }
+
+void UStatComponent::DropItem(class ABaseItem *item)
+{
+	if(item == nullptr)
+		return;
+	
+	switch (item->GetModStat())
+	{
+	case StatType::HP:
+		AddMaxHp(-item->GetValue());
+		break;
+	case StatType::MP:
+		AddMaxMp(-item->GetValue());
+		break;
+	case StatType::CurHP:
+		AddCurHp(-item->GetValue());
+		break;
+	case StatType::CurMP:
+		AddCurMp(-item->GetValue());
+		break;
+	case StatType::STR:
+		AddStr(-item->GetValue());
+		break;
+	case StatType::DEX:
+		AddDex(-item->GetValue());
+		break;
+	case StatType::INT:
+		AddInt(-item->GetValue());
+		break;
+	default:
+		break;
+	}
+}
+
 
 void UStatComponent::SetDragonLevelInit(int level)
 {
@@ -597,13 +483,5 @@ void UStatComponent::SetDragonLevelInit(int level)
 		_bonusPoint = Data->BonusPoint;
 		_PILevelDelegate.Broadcast(_level);
 
-		if (_level == 1)
-		{
-			_ogHp = _maxHp;
-			_ogMp = _maxMp;
-			_ogStr = _str;
-			_ogDex = _dex;
-			_ogInt = _int;
-		}
 	}
 }

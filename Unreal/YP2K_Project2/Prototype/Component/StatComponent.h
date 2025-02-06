@@ -80,74 +80,51 @@ public:
 
 	int32 GetCurHp() { return _curHp; }
 	int32 GetMaxHp() { return _maxHp; }
-	int32 GetOgHp() { return _ogHp; }
-	int32 GetModHp() { return _modHp; }
-
+	float HpRatio() { return _curHp / (float)_maxHp; }
 	int32 GetLevel() { return _level; }
 	int32 GetExp() { return _curExp; }
-
+	float ExpRatio() { return _curExp / (float)_nextExp; }
 	int32 GetCurMp() { return _curMp; }
 	int32 GetMaxMp() { return _maxMp; }
-	int32 GetOgMp() { return _ogMp; }
-	int32 GetModMp() { return _modMp; }
-
 	int32 GetNextExp() { return _nextExp; }
 	int32 GetStr() { return _str; }
-	int32 GetOgStr() { return _ogStr; }
-	int32 GetModStr() { return _modStr; }
-
 	int32 GetDex() { return _dex; }
-	int32 GetOgDex() { return _ogDex; }
-	int32 GetModDex() { return _modDex; }
-
 	int32 GetInt() { return _int; }
-	int32 GetOgInt() { return _ogInt; }
-	int32 GetModInt() { return _modInt; }
-
 	float GetAttackRange() { return _attackRange; }
 	float GetAttackRadius() { return _attackRadius; }
-
 	int32 GetBonusPoint() { return _bonusPoint; }
 
 	void SetLevel(int32 newLevel);
 	void SetMaxHp(int32 newMaxHp);
-	void SetModHp(int32 newModHp);
-	void SetOgHp(int32 newMaxHp);
 	void SetMaxMp(int32 newMaxMp);
-	void SetModMp(int32 newModMp);
-	void SetOgMp(int32 newMaxMp);
-	void SetBonusPoint(int32 newBp);
-	void SetStr(int32 newstr);
-	void SetOgStr(int32 newstr);
-	void SetModStr(int32 newstr);
-	void SetDex(int32 newdex);
-	void SetOgDex(int32 newdex);
-	void SetModDex(int32 newdex);
-	void SetInt(int32 newint);
-	void SetOgInt(int32 newint);
-	void SetModInt(int32 newint);
-	void SetExp(int32 newexp);
-	void SetNextExp(int32 newnextexp);
-
-	void AddStat(StatType type, int32 amount = 1);
-
-	void SetStatBoost(int32 rate);
-	void SetStun(bool stun) { _stunned = stun; }
-	float HpRatio() { return _curHp / (float)_maxHp; }
-
 	void SetHp(int32 hp);
 	void SetMp(int32 mp);
-
-	int AddCurHp(int32 amount);
-	int AddCurMp(int32 amount);
-
+	void SetBonusPoint(int32 newBp);
+	void SetStr(int32 newstr);
+	void SetDex(int32 newdex);
+	void SetInt(int32 newint);
+	void SetExp(int32 newexp);
+	void SetNextExp(int32 newnextexp);
+	void SetStatBoost(int32 rate);
+	void SetStun(bool stun) { _stunned = stun; }
 	void SetAttackRange(int32 newrange) { _attackRange = newrange; }
 	void SetAttackRadius(int32 newradius) { _attackRadius = newradius; }
+	void SetAttackDamage(int32 newdamage) { _attackDamage = newdamage; }
 
+	void AddMaxHp(int32 amount);
+	void AddMaxMp(int32 amount);
+	void AddCurHp(int32 amount);
+	void AddCurMp(int32 amount);
+	void AddStr(int32 amount);
+	void AddDex(int32 amount);
+	void AddInt(int32 amount);
 	void AddAttackDamage(float amount);
 	void AddExp(int32 amount);
 
-	void ModStat(StatType stat, int32 amount);
+	void UseItem(class ABaseItem *item);
+	void DropItem(class ABaseItem *item);
+
+
 
 	void SetLevelInit(int level);
 	void SetMonsterLevelInit(int level);
@@ -159,7 +136,7 @@ public:
 
 	bool IsDead() { return _curHp <= 0; }
 
-	float EXpRatio() { return _curExp / (float)_nextExp; }
+
 	PlHP _PlHPDelegate;
 	PlMaxHP _PlMaxHPDelegate;
 	PlMP _PlMPDelegate;
@@ -167,9 +144,6 @@ public:
 	PIEXP _PlEXPDelegate;
 	PILevel _PILevelDelegate;
 	DeathDelegate _deathDelegate;
-
-	int32 GetBaseStat(StatType statType) const;
-	void DecreaseStat(StatType stat, int32 amount);
 
 	virtual FString GetLevelUpName() const;
 	virtual FString GetLevelUpSound() const;
@@ -187,49 +161,19 @@ protected:
 	int32 _maxHp;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Stat, meta = (AllowPrivateAccess = true))
-	int32 _ogHp;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Stat, meta = (AllowPrivateAccess = true))
-	int32 _modHp;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Stat, meta = (AllowPrivateAccess = true))
 	int32 _curMp;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Stat, meta = (AllowPrivateAccess = true))
 	int32 _maxMp;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Stat, meta = (AllowPrivateAccess = true))
-	int32 _ogMp;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Stat, meta = (AllowPrivateAccess = true))
-	int32 _modMp;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Stat, meta = (AllowPrivateAccess = true))
 	int32 _str;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Stat, meta = (AllowPrivateAccess = true))
-	int32 _ogStr;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Stat, meta = (AllowPrivateAccess = true))
-	int32 _modStr;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Stat, meta = (AllowPrivateAccess = true))
 	int32 _dex;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Stat, meta = (AllowPrivateAccess = true))
-	int32 _ogDex;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Stat, meta = (AllowPrivateAccess = true))
-	int32 _modDex;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Stat, meta = (AllowPrivateAccess = true))
 	int32 _int;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Stat, meta = (AllowPrivateAccess = true))
-	int32 _ogInt;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Stat, meta = (AllowPrivateAccess = true))
-	int32 _modInt;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Stat, meta = (AllowPrivateAccess = true))
 	float _attackRange;

@@ -22,11 +22,11 @@
 USTRUCT()
 struct FPlayerStatsStruct {
     GENERATED_BODY()
-    int32 Level, MaxHp, CurHp, OgHp, ModHp;
-    int32 MaxMp, CurMp, OgMp, ModMp;
-    int32 Str, OgStr, ModStr;
-    int32 Dex, OgDex, ModDex;
-    int32 Int, OgInt, ModInt;
+    int32 Level, MaxHp, CurHp;
+    int32 MaxMp, CurMp;
+    int32 Str;
+    int32 Dex;
+    int32 Int;
     int32 Exp, NextExp, BonusPoint, Money;
     float AttackRadius, AttackRange;
 };
