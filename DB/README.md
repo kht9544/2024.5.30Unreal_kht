@@ -1,29 +1,27 @@
-----------------------------폴더 정리------------------------<br/><br/>
-1.JOIN과 서브쿼리 (SQL_Join.sql)<br/>
-    players 테이블에서 특정 조건의 데이터를 추출<br/>
-    UNION, INNER JOIN, OUTER JOIN 등을 사용하여 여러 테이블 간 관계 탐색<br/>
-    HAVING 절을 활용한 데이터 필터링 <br/><br/>
-2.트랜잭션 (SQL_Transaction.sql)<br/>
-    트랜잭션 (BEGIN TRAN, COMMIT, ROLLBACK)을 이용한 데이터 무결성 보장<br/>
-    TRY CATCH를 활용한 예외 처리<br/><br/>
-3/인덱스 (SQL_INDEX.sql, SQLQuery_INDEX_심화.sql)<br/>
-    클러스터형 인덱스와 넌클러스터형 인덱스 생성 및 삭제<br/>
-    인덱스를 활용한 검색 속도 최적화 (B-트리 구조 기반 탐색)<br/><br/>
-4.조건문 및 변수 활용 (SQL_Conditional.sql)<br/>
-    SQL에서 DECLARE, SET을 이용한 변수 선언 및 사용<br/>
-    IF, WHILE, GO 등을 활용한 SQL 프로그래밍<br/><br/>
-5.그룹화 및 집계 함수 (SQL_GROUPBY.sql)<br/>
-    GROUP BY와 HAVING을 활용한 데이터 그룹화 및 필터링<br/>
-    COUNT(), SUM()을 사용하여 특정 기준의 통계 분석<br/><br/>
-6.윈도우 함수 (SQL_WindowF_Study.sql, SQL_WINDOW.sql)<br/>
-    ROW_NUMBER(), RANK(), DENSE_RANK() 등의 함수 활용<br/>
-    PARTITION BY와 ORDER BY를 활용한 데이터 집계 및 분석<br/>
-    LAG(), LEAD(), FIRST_VALUE(), LAST_VALUE() 등을 활용한 데이터 비교<br/><br/>
-7.SQL 함수 활용 (SQL_Functions.sql)<br/>
-    DATEFROMPARTS(), LIKE 등을 사용한 데이터 가공 및 필터링<br/><br/>
-8.데이터 삽입 및 수정 (SQL_WRITE.sql)<br/>
-    INSERT, DELETE, UPDATE를 활용한 데이터 조작<br/>
-    CREATE TABLE, ALTER TABLE을 이용한 데이터베이스 스키마 변경<br/>
-    PRIMARY KEY, CONSTRAINT을 통한 제약 조건 설정<br/><br/>
-9.테스트용 SQL 쿼리 (SQL_Test.sql)<br/>
-    SELECT, ORDER BY, WHERE 등의 기본 SQL 문법 실습
+## 📌 프로젝트 개요
+SQL 관련 개념과 실습을 정리하고 학습하기 위한 프로젝트입니다. 다양한 SQL 기능을 테스트하고 연구하며, 주요 개념을 코드와 함께 정리합니다.
+
+## 📂 프로젝트 구조
+```
+SQL_Join.sql            -- SQL JOIN 관련 예제 및 학습 자료
+SQL_Transaction.sql     -- 트랜잭션 개념 및 실습 코드
+SQL_INDEX.sql           -- 인덱스 최적화 및 심화 학습 내용
+SQL_Conditional.sql     -- 조건문(SQL CASE, IF 등) 관련 내용
+SQL_GROUPBY.sql        -- GROUP BY 및 집계 함수 학습 자료
+SQL_WindowF_Study.sql  -- 윈도우 함수(Window Function) 연구
+SQLQuery_INDEX_심화.sql -- 인덱스 최적화 심화 분석
+SQL_Test.sql           -- SQL 테스트 및 실험 코드
+SQL_Functions.sql      -- SQL 내장 함수 및 사용자 정의 함수 정리
+SQL_WINDOW.sql         -- 윈도우 함수 개념 정리 및 예제
+SQL_WRITE.sql          -- SQL 데이터 삽입, 갱신, 삭제 관련 실습
+```
+
+
+## 📖 학습 내용
+- **SQL JOIN**: INNER JOIN, LEFT JOIN, RIGHT JOIN 등 다양한 조인 방식 학습
+- **트랜잭션(Transaction)**: COMMIT, ROLLBACK, ACID 원칙 정리
+- **인덱스(INDEX)**: 인덱스 최적화 및 성능 테스트
+- **조건문(Conditional Statements)**: IF, CASE, WHERE 조건 활용
+- **그룹화 및 집계(GROUP BY & Aggregation)**: SUM, COUNT, AVG 등
+- **윈도우 함수(Window Functions)**: RANK, DENSE_RANK, ROW_NUMBER 등의 활용
+- **SQL 함수(Function)**: 내장 함수 및 사용자 정의 함수(UDF) 실습
