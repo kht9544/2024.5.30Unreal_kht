@@ -26,7 +26,7 @@
   - **SimpleShooter**: 기본 FPS 게임 구현
   - **Team_YPK_UnrealProject**: 1차 RPG 팀 프로젝트
   - **Team_YP2K_Prototype**: 2차 메인 RPG 팀 프로젝트
-- 패키징 파일: [Google Drive Link] : https://drive.google.com/drive/folders/1R1Yo0E5IGBl_li2Lf_HMDNkwYBS-YR?usp=sharing
+- 패키징 파일: [Google Drive Link] : [https://drive.google.com/drive/folders/1R1Yo0E5IGBl_li2Lf_HMDNkwYBS-YR?usp=sharing](https://drive.google.com/drive/folders/1R1YOr0E5lGBl__Li2Lf_HMDNkwYBS-YR?hl=ko)
 
 ### 4. **DB**
 - SQL 관련 코드
